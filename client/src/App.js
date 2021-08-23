@@ -130,7 +130,9 @@ async function handleSubmitCountry(e) {
 
 return datacopy
 
-    })
+    }).catch((error) => {
+  console.error('Error:', error);
+});
         await fetch("/searchcountries/"+searchValue.current.value)
         .then(result=>result.json())
         .then(data=>{
@@ -151,8 +153,6 @@ for (var x in datacopytwo){
     delete datacopytwo.x
   }
 }
-
-
 
 for (var y in datacopy){
   if (!datatwokeys.includes(x)){
@@ -230,7 +230,9 @@ for (var s in datacopy){
 
       setPercentageStats(dataobject)
       setOtherStats(dataobjecttwo)
-        })
+        }).catch((error) => {
+  console.error('Error:', error);
+});
 }
 
 async function handleStatisticChange(event) {
@@ -354,7 +356,9 @@ var dataobjecttwo= {
        setAveragesData(dataobjecttwo)
        setGraphSize(dat.length*20)
         setData(dataobject)
-      })
+      }).catch((error) => {
+  console.error('Error:', error);
+});
 }
 
 
