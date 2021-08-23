@@ -30,8 +30,8 @@ Axios.get('http://ec2-54-174-131-205.compute-1.amazonaws.com/API/HDRO_API.php/in
 
 
   console.log(data)
-for (var x in data.indicator_value){
-  console.log(x,data.indicator_value[`${x}`])
+for (var x in data.data.indicator_value){
+  console.log(x,data[`data`][`indicator_value`][`${x}`])
 }}
 )
 

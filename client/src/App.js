@@ -36,7 +36,7 @@ const { height, width } = useWindowDimensions()
 
 useEffect(()=>{
 
-  fetch('http://localhost:5000/getalldata')
+  fetch('/getalldata')
   .then(result=>result.json())
   .then(data=>{
     var datacopy=JSON.parse(JSON.stringify(data))
@@ -53,11 +53,13 @@ console.log("filtereddatacopy",filtereddatacopy)
    setStatLabels(filtereddatacopythree)
   })
 
-  fetch('http://localhost:5000/getallcountries')
+  fetch('/getallcountries')
   .then(result=>result.json())
   .then(data=>{
 console.log(data)
   })
+
+
 
 },[])
 
@@ -115,7 +117,7 @@ async function handleSubmitCountry(e) {
 
     console.log(secondCountrySearchTerm.current.value)
 
-    var datacopy=await fetch("http://localhost:5000/searchcountries/"+secondCountrySearchTerm.current.value)
+    var datacopy=await fetch("/searchcountries/"+secondCountrySearchTerm.current.value)
     .then(result=>result.json())
     .then(data=>{
       console.log(data[0])
@@ -129,7 +131,7 @@ async function handleSubmitCountry(e) {
 return datacopy
 
     })
-        await fetch("http://localhost:5000/searchcountries/"+searchValue.current.value)
+        await fetch("/searchcountries/"+searchValue.current.value)
         .then(result=>result.json())
         .then(data=>{
           console.log(data[0])
@@ -239,7 +241,7 @@ setPercentageStats({})
 setOtherStats({})
   event.preventDefault()
   console.log("event.target",event.target.value)
-      await fetch("http://localhost:5000/searchstats/"+event.target.value)
+      await fetch("/searchstats/"+event.target.value)
       .then(result=>result.json())
       .then(data=>{
         console.log(data)
