@@ -23,7 +23,7 @@ if (process.env.CLEARDB_DATABASE_URL) {
   // console.log(process.env.CLEARDB_DATABASE_URL)
   var db = mysql.createConnection(process.env.CLEARDB_DATABASE_URL)
 } else {
-   var db = mysql.createConnection('mysql://bba9d7ff992f3f:a13cdab0@us-cdbr-east-04.cleardb.com/heroku_23d7f980f7802cd?reconnect=true');
+   var db = mysql.createConnection('mysql://b6f6f5c1639476:9e638cc8@us-cdbr-east-04.cleardb.com/heroku_34c644139b40fcc?reconnect=true');
 };
 
 
@@ -433,16 +433,15 @@ for (var x in countriesObject){
     await db.query(
        `INSERT INTO countries (name,population,
         adolescent_birth_rate_per_thousand,human_inequality_coefficient,
-        fossil_fuel_consumption_percentage_of_total_energy_consumption,gender_inequality_index,
+        fossil_fuel_consumption_percentage_of_total_energy_consumption,
         gross_enrolement_tertiary_education_ratio,
         mean_years_of_schooling,natural_resource_depletion,
         research_and_development_expenditure_percent_of_gpd,
-        percentage_women_in_parliament,suicide_rate_male,suicide_rate_female) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+        percentage_women_in_parliament,suicide_rate_male,suicide_rate_female) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`,
         [x.toLowerCase(),countriesObject[`${x}`][`population`],
         countriesObject[`${x}`][`adolescentbirthrateperthousand`],countriesObject[`${x}`][`humaninequalitycoefficient`],
-        countriesObject[`${x}`][`healthexpenditurepercentagegdp`],
         countriesObject[`${x}`][`fossilfuelconsumptionpercentageoftotalenergyconsumption`],
-        countriesObject[`${x}`][`genderinequalityindex`],countriesObject[`${x}`][`grossenrolementtertiaryeducationratio`],
+        countriesObject[`${x}`][`grossenrolementtertiaryeducationratio`],
         countriesObject[`${x}`][`meanyearsofschooling`],countriesObject[`${x}`][`naturalresourcedepletion`],
         countriesObject[`${x}`][`researchanddevelopmentexpenditurepercentofgpd`],
         countriesObject[`${x}`][`percentagewomeninparliament`],countriesObject[`${x}`][`suicideratemale`],

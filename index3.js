@@ -23,7 +23,7 @@ if (process.env.CLEARDB_DATABASE_URL) {
   // console.log(process.env.CLEARDB_DATABASE_URL)
   var db = mysql.createConnection(process.env.CLEARDB_DATABASE_URL)
 } else {
-   var db = mysql.createConnection('mysql://bba9d7ff992f3f:a13cdab0@us-cdbr-east-04.cleardb.com/heroku_23d7f980f7802cd?reconnect=true');
+   var db = mysql.createConnection('mysql://b6f6f5c1639476:9e638cc8@us-cdbr-east-04.cleardb.com/heroku_34c644139b40fcc?reconnect=true');
 };
 
 
@@ -682,9 +682,7 @@ db.query(
     heart_disease_deaths_per_hundred_thousand= ${heart||null},
     diarrhoea_deaths_per_hundred_thousand=${diarrhoea||null},
     diabetes_death_rate_per_hundred_thousand=${diabetes||null},
-    prob_death_cardio_vascular_cancer_diabetes_respiratory=${percentage||null},
     drug_related_deaths_per_hundred_thousand=${drug||null},
-    gov_benefits_for_drug_use_disorder=${govbenefits||null},
     home_ownership_rate=${homeownership||null},
     homelessness_rate=${homelessness||null},
     litres_of_alcohol_per_person_per_year=${litres||null},

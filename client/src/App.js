@@ -7,8 +7,8 @@ import Hammer from "hammerjs";
 
 
 var socialistcountriesmarxistleninist=["belarus","china","laos","north korea","cuba","viet nam"]
-var socialdemocraticcountries=["norway","sweden","finland","denmark","portugal","bolivia","armenia",
-"ecuador","iceland","nicaragua","northern ireland","portugal","serbia","venezuela"]
+var socialdemocraticcountries=["norway","sweden","finland","denmark","portugal","bolivia",
+"ecuador","peru","iceland","nicaragua","northern ireland","portugal","serbia","venezuela"]
 
 console.log(references)
 
@@ -41,8 +41,16 @@ useEffect(()=>{
   .then(data=>{
     var datacopy=JSON.parse(JSON.stringify(data))
     datacopy=datacopy.map(item=>{return item.COLUMN_NAME})
-    datacopy=datacopy.slice(2)
-   setStatLabels(datacopy)
+
+    datacopy=datacopy.slice(3)
+    console.log("datacopy",datacopy)
+    var filtereddatacopy=datacopy.filter(item=>!(item==="prob_death_cardio_vascular_cancer_diabetes_respiratory"))
+    var filtereddatacopytwo=filtereddatacopy.filter(item=>!(item==="gov_benefits_for_drug_use_disorder"))
+    var filtereddatacopythree=filtereddatacopytwo.filter(item=>!(item==="fossil_fuel_consumption_percentage_of_total_energy_consumption"))
+
+
+console.log("filtereddatacopy",filtereddatacopy)
+   setStatLabels(filtereddatacopythree)
   })
 
   fetch('http://localhost:5000/getallcountries')
@@ -50,6 +58,7 @@ useEffect(()=>{
   .then(data=>{
 console.log(data)
   })
+
 },[])
 
 useEffect(()=>{
@@ -65,7 +74,7 @@ function zoomIn(e){
   console.log(zoom)
   var zoomnum=zoom.substring(0, zoom.length - 1);
   zoomnum=Number(zoomnum)
-  zoomnum=zoomnum+5
+  zoomnum=zoomnum+20
   console.log(zoomnum)
   var zoomstring=`${zoomnum}%`
   console.log(zoomstring)
@@ -80,7 +89,7 @@ function zoomOut(e){
   console.log(zoom)
   var zoomnum=zoom.substring(0, zoom.length - 1);
   zoomnum=Number(zoomnum)
-  zoomnum=zoomnum-5
+  zoomnum=zoomnum-20
   console.log(zoomnum)
   var zoomstring=`${zoomnum}%`
   console.log(zoomstring)
@@ -395,7 +404,7 @@ console.log("displayastatallcountries",displayastatallcountries)
     </div>
     </div>}
 
-    {(!toggle&&averagesData)&&<div className='graph graphtwo' ref={messagesEndRef} style={{display:displayastatallcountries}}>
+    {(!toggle&&averagesData)&&<div className='graph graphtwo' ref={messagesEndRef} style={{overflowY:"scroll",overflowX:"scroll",display:displayastatallcountries}}>
     <div className='innergraphtwo' style={{display:displayastatallcountries, height:zoom}} options={{ maintainAspectRatio: false }}>
     <Bar options={{ maintainAspectRatio: false, responsive:true, zoom: {enabled: true,mode: 'x',},pan: {enabled: true,mode: 'x',} }} data={averagesData}/>
     </div>
@@ -406,13 +415,13 @@ console.log("displayastatallcountries",displayastatallcountries)
 
     <div className='graphs' style={{display:viewGraph}}>
     <div className='screenbig'>
-    {otherStats&&<div className='graph graphone' ref={messagesEndRef} style={{overflowY:"hidden",overflowX:"scroll",display:!displayastatallcountries}} options={{ maintainAspectRatio: false }}>
-    <div className='innergraphone' style={{display:!displayastatallcountries, height:zoom}} options={{ maintainAspectRatio: false }}>
+    {otherStats&&<div className='graph graphone' ref={messagesEndRef} style={{overflowY:"scroll",overflowX:"scroll",display:!displayastatallcountries}} options={{ maintainAspectRatio: false }}>
+    <div className='innergraphone' style={{width:'90vw',display:!displayastatallcountries, height:zoom}} options={{ maintainAspectRatio: false }}>
     <Bar  options={{ maintainAspectRatio: false,responsive:true, zoom: {enabled: true,mode: 'x',},pan: {enabled: true,mode: 'x',} }} data={otherStats}/>
     </div></div>}
 
-    {percentageStats&&<div className='graph graphtwo' ref={messagesEndRef} style={{width:"30vw",display:!displayastatallcountries}}>
-    <div className='innergraphtwo' style={{width:"30vw",display:!displayastatallcountries, height:zoom}} options={{ maintainAspectRatio: false }}>
+    {percentageStats&&<div className='graph graphtwo' ref={messagesEndRef} style={{overflowY:"scroll",overflowX:"scroll",width:"30vw",display:!displayastatallcountries}}>
+    <div className='innergraphtwo' style={{width:"50vw",display:!displayastatallcountries, height:zoom}} options={{ maintainAspectRatio: false }}>
     <Bar options={{ maintainAspectRatio: false, responsive:true, zoom: {enabled: true,mode: 'x',},pan: {enabled: true,mode: 'x',}}} data={percentageStats}/>
     </div>
     </div>}
@@ -425,7 +434,7 @@ console.log("displayastatallcountries",displayastatallcountries)
     </div></div>}
 
     {(toggle&&percentageStats)&&<div className='graph graphone'ref={messagesEndRef} style={{overflowY:"scroll",overflowX:"scroll"}}>
-    <div className='innergraphone' style={{width:"150vw", height:zoom}} options={{ maintainAspectRatio: false }}>
+    <div className='innergraphone' style={{width:"90vw", height:zoom}} options={{ maintainAspectRatio: false }}>
     <Bar options={{ maintainAspectRatio: false, responsive:true,zoom: {enabled: true,mode: 'x',},pan: {enabled: true,mode: 'x',} }} data={percentageStats} /></div></div>}
     </div>
 
@@ -443,7 +452,7 @@ console.log("displayastatallcountries",displayastatallcountries)
           type='text'
           name='searchValue'
           id='searchValue'
-          value='China'
+          defaultValue='China'
           ref={searchValue}
         />
         <label htmlFor='name'>Search for stats on a second country to compare</label>
@@ -451,7 +460,7 @@ console.log("displayastatallcountries",displayastatallcountries)
           type='text'
           name='secondCountrySearchTerm'
           id='secondCountrySearchTerm'
-          value='Australia'
+          defaultValue='Australia'
           ref={secondCountrySearchTerm}
         />
         <div id="buttondiv">

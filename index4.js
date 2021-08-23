@@ -23,7 +23,7 @@ if (process.env.CLEARDB_DATABASE_URL) {
   // console.log(process.env.CLEARDB_DATABASE_URL)
   var db = mysql.createConnection(process.env.CLEARDB_DATABASE_URL)
 } else {
-   var db = mysql.createConnection('mysql://bba9d7ff992f3f:a13cdab0@us-cdbr-east-04.cleardb.com/heroku_23d7f980f7802cd?reconnect=true');
+   var db = mysql.createConnection('mysql://b6f6f5c1639476:9e638cc8@us-cdbr-east-04.cleardb.com/heroku_34c644139b40fcc?reconnect=true');
 };
 
 
@@ -442,9 +442,11 @@ console.log("inserted into database")
 }
 })()
 
+
 async function fetchUNDATA(indicator){
   var d = new Date();
 var n = d.getFullYear();
+
   for (var x=n;x>2000;x--){
     var data=await Axios.get(`http://ec2-54-174-131-205.compute-1.amazonaws.com/API/HDRO_API.php/indicator_id=${indicator}/year=${x}`)
     .then(json=>{

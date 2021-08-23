@@ -4,6 +4,8 @@ body {
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;
   background-image:url("1024px-18th_National_Congress_of_the_Communist_Party_of_China.jpg");
+  background-repeat: no-repeat;
+  background-size: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,8 +103,7 @@ select{
 .graphone{
 bottom:5vh;
 height:40vh;
-scroll-margin-top: 100;
-scroll-padding-top: 100;
+
 }
 
 .graphtwo{
@@ -110,8 +111,7 @@ top:5vh;
 left:5vw;
 width:30vw;
 height:44vh;
-scroll-margin-top: 100;
-scroll-padding-top: 100;
+
 }
 
 .innergraphone{
