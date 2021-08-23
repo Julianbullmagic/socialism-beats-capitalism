@@ -25,15 +25,7 @@ if (process.env.CLEARDB_DATABASE_URL) {
 } else {
    var db = mysql.createConnection('mysql://b6f6f5c1639476:9e638cc8@us-cdbr-east-04.cleardb.com/heroku_34c644139b40fcc?reconnect=true');
 };
-Axios.get('http://ec2-54-174-131-205.compute-1.amazonaws.com/API/HDRO_API.php/indicator_id=128306/year=2018')
-.then(data=>{
 
-
-  console.log(data)
-for (var x in data.data.indicator_value){
-  console.log(x,data[`data`][`indicator_value`][`${x}`])
-}}
-)
 
 app.get("/getallcountries", (req, res) => {
 
