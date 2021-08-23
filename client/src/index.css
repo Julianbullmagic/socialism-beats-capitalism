@@ -1,0 +1,219 @@
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  background-image:url("1024px-18th_National_Congress_of_the_Communist_Party_of_China.jpg");
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.screenbig{
+  display:block;
+}
+
+.screensmall{
+  display:none;
+}
+
+.togglebutton{
+  display:none;
+}
+
+.container{
+top:5vh;
+left:38vw;
+width:57vw;
+height:44vh;
+position:fixed;
+border-radius:10px;
+background-color:white;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+
+hr{
+  width:57vw;
+}
+
+button {
+  background-color: white;
+  color: black;
+  border: 2px solid #e7e7e7;
+}
+
+button:hover {background-color: #e7e7e7;}
+
+label{
+  margin:5px
+}
+
+input {
+  margin:5px;
+  height:1vh;
+  width:250px;
+  padding:10px;
+  border:0;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.2);
+}
+
+select{
+  margin:5px;
+  height:6vh;
+  width:260px;
+  margin-bottom:10px;
+  padding:10px;
+  border:0;
+  box-shadow:0 0 15px 4px rgba(0,0,0,0.2);
+}
+
+.firstform{
+  border-style: solid;
+  border-color: black;
+  border:2px;
+}
+
+.main{
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+}
+
+.graphs{
+  width:100vw;
+  height:100vh;
+}
+
+.graph{
+  background-color:white;
+  position:fixed;
+  width:90vw;
+  left:5vw;
+  border-radius:10px;
+  padding:2px;
+
+}
+
+.graphone{
+bottom:5vh;
+height:40vh;
+scroll-margin-top: 100;
+scroll-padding-top: 100;
+}
+
+.graphtwo{
+top:5vh;
+left:5vw;
+width:30vw;
+height:44vh;
+scroll-margin-top: 100;
+scroll-padding-top: 100;
+}
+
+.innergraphone{
+width:300vw;
+height:40vh;
+}
+
+.innergraphtwo{
+width:20vw;
+height:44vh;
+}
+
+
+
+@media only screen and (max-width: 705px ) {
+  input {
+    width:125px;
+  }
+
+  select{
+    width:125px;
+  }
+
+}
+
+
+@media only screen and (max-width: 375px ) {
+  input {
+    width:65px;
+  }
+
+  select{
+    width:65px;
+  }
+
+}
+
+
+
+@media only screen and (max-width: 361px) {
+
+  hr{
+    width:96vw;
+  }
+
+  .container{
+  top:2vh;
+  left:2vw;
+  width:96vw;
+  height:49vh;
+  position:fixed;
+  border-radius:10px;
+  background-color:white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+
+  input {
+    width:250px;
+  }
+
+  select{
+    width:250px;
+  }
+
+
+.graphone{
+    top:53vh;
+height:45vh;
+width:95vw;
+  }
+
+.innergraphone{
+width:300vw;
+height:45vh;
+}
+
+.graph{
+  left:2vw;
+}
+
+.togglebutton{
+  display:inline;
+}
+.graphtwo{
+    top:53vh;
+height:45vh;
+width:95vw;
+  }
+
+.innergraphtwo{
+width:95vw;
+height:45vh;
+}
+
+.screenbig{
+  display:none;
+}
+
+.screensmall{
+  display:block;
+}
+
+}
