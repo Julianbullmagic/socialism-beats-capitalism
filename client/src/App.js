@@ -36,6 +36,7 @@ const { height, width } = useWindowDimensions()
 
 useEffect(()=>{
 
+
   fetch('/getalldata')
   .then(result=>result.json())
   .then(data=>{
@@ -58,7 +59,6 @@ console.log("filtereddatacopy",filtereddatacopy)
   .then(data=>{
 console.log(data)
   })
-
 
 
 },[])
