@@ -4,7 +4,6 @@ export const references={
   heart_disease_deaths_per_hundred_thousand:'https://www.who.int/data/gho/info/gho-odata-api',
   diarrhoea_deaths_per_hundred_thousand:'https://www.who.int/data/gho/info/gho-odata-api',
   diabetes_death_rate_per_hundred_thousand:'https://www.who.int/data/gho/info/gho-odata-api',
-  percentage_prob_death_cardio_vascular_cancer_diabetes_respiratory:'https://www.who.int/data/gho/info/gho-odata-api',
   drug_related_deaths_per_hundred_thousand:'https://www.who.int/data/gho/info/gho-odata-api',
   gov_benefits_for_drug_use_disorder:'https://www.who.int/data/gho/info/gho-odata-api',
   home_ownership_rate:"https://en.wikipedia.org/wiki/List_of_countries_by_home_ownership_rate",

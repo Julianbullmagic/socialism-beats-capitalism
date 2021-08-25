@@ -343,7 +343,7 @@ console.log(dataobject.datasets[0].backgroundColor)
 var dataobjecttwo= {
     labels: ["Marxist-Leninist","Democratic Socialist","Capitalist"],
     datasets: [{
-      label: `${event.target.value}`,
+      label: `Averages`,
       data: [socialistcountriesmarxistleninistvaluesaverage,
       socialdemocraticcountriesvaluesaverage,
       capitalistvaluesaverage],
@@ -435,7 +435,7 @@ console.log("displayastatallcountries",displayastatallcountries)
     <div className='screensmall'>
 
     {(!toggle&&otherStats)&&<div className='graph graphone' ref={messagesEndRef} style={{overflowY:"scroll",overflowX:"scroll"}} options={{ maintainAspectRatio: false }}>
-    <div className='innergraphone' options={{ maintainAspectRatio: false, height:zoom }}>
+    <div className='innergraphone'  style={{width:"90vw", height:zoom}} options={{ maintainAspectRatio: false }}>
     <Bar options={{ maintainAspectRatio: false,responsive:true,  zoom: {enabled: true,mode: 'x',},pan: {enabled: true,mode: 'x',} }} data={otherStats} />
     </div></div>}
 
