@@ -6,9 +6,13 @@ import * as zoom from 'chartjs-plugin-zoom'
 import Hammer from "hammerjs";
 
 
-var socialistcountriesmarxistleninist=["belarus","china","laos","north korea","cuba","viet nam"]
+var socialistcountriesmarxistleninist=["china","laos","north korea","cuba","viet nam"]
 var socialdemocraticcountries=["norway","sweden","finland","denmark","portugal","bolivia",
 "ecuador","peru","iceland","nicaragua","northern ireland","portugal","serbia","venezuela"]
+
+var formersocialistcountries=["belarus","bosnia","herzegovina","croatia","macedonia","montenegro","serbiaMoldova",
+"estonia","latvia","lithuania","kazakhstan","kyrgyzstan","tajikistan","turkmenistan","uzbekistan","russia",
+"armenia","azerbaijan","georgia","ukraine"]
 
 console.log(references)
 
@@ -52,13 +56,13 @@ useEffect(()=>{
 
 console.log("filtereddatacopy",filtereddatacopy)
    setStatLabels(filtereddatacopythree)
-  })
+ }).catch(err=>console.log(err))
 
   fetch('/getallcountries')
   .then(result=>result.json())
   .then(data=>{
 console.log(data)
-  })
+  }).catch(err=>console.log(err))
 
 
 },[])
@@ -258,13 +262,18 @@ var socialistcountriesmarxistleninistlabels=[]
 var socialdemocraticcountriesvalues=[]
 var socialdemocraticcountrieslabels=[]
 
+var formersocialistcountriesvalues=[]
+var formersocialistcountrieslabels=[]
+
 var capitalistvalues=[]
 var capitalistlabels=[]
 
 var socialistcountriesmarxistleninistvaluestimespopulution=[]
+var formersocialistcountriesvaluestimespopulation=[]
 var socialdemocraticcountriesvaluestimespopulation=[]
 var capitalistvaluestimespopulation=[]
 
+var formersocialistcountriestotalpopulation=0
 var socialistcountriesmarxistleninisttotalpopulation=0
 var socialdemocraticcountriestotalpopulation=0
 var capitalisttotalpopulation=0
@@ -283,12 +292,16 @@ for (var x of datacopy){
     socialdemocraticcountriesvaluestimespopulation.push(x[`population`]*x[`${event.target.value}`])
     socialdemocraticcountriestotalpopulation=socialdemocraticcountriestotalpopulation+x[`population`]
     socialdemocraticcountriesvalues.push(x[`${event.target.value}`])
-  }
-  else{
+  }else if(formersocialistcountries.includes(x.name.toLowerCase())){
     capitalistlabels.push(x[`name`])
     capitalistvaluestimespopulation.push(x[`population`]*x[`${event.target.value}`])
     capitalisttotalpopulation=capitalisttotalpopulation+x[`population`]
     capitalistvalues.push(x[`${event.target.value}`])
+  }else{
+    formersocialistcountrieslabels.push(x[`name`])
+    formersocialistcountriesvaluestimespopulation.push(x[`population`]*x[`${event.target.value}`])
+    formersocialistcountriestotalpopulation=formersocialistcountriestotalpopulation+x[`population`]
+    formersocialistcountriesvalues.push(x[`${event.target.value}`])
   }
 }
 }
@@ -301,21 +314,24 @@ console.log(socialistcountriesmarxistleninisttotalpopulation)
 console.log(socialdemocraticcountriestotalpopulation)
 console.log(capitalisttotalpopulation)
 
+formersocialistcountriesvaluestimespopulation=formersocialistcountriesvaluestimespopulation.reduce((a, b) => a + b)
 socialistcountriesmarxistleninistvaluestimespopulution=socialistcountriesmarxistleninistvaluestimespopulution.reduce((a, b) => a + b)
 socialdemocraticcountriesvaluestimespopulation=socialdemocraticcountriesvaluestimespopulation.reduce((a, b) => a + b)
 capitalistvaluestimespopulation=capitalistvaluestimespopulation.reduce((a, b) => a + b)
 
+var formersocialistcountriesvaluesaverage=formersocialistcountriesvaluestimespopulation/formersocialistcountriestotalpopulation
 var socialistcountriesmarxistleninistvaluesaverage=socialistcountriesmarxistleninistvaluestimespopulution/socialistcountriesmarxistleninisttotalpopulation
 var socialdemocraticcountriesvaluesaverage=socialdemocraticcountriesvaluestimespopulation/socialdemocraticcountriestotalpopulation
 var capitalistvaluesaverage=capitalistvaluestimespopulation/capitalisttotalpopulation
 
+console.log(formersocialistcountriesvaluesaverage)
 console.log(socialistcountriesmarxistleninistvaluesaverage)
 console.log(socialdemocraticcountriesvaluesaverage)
 console.log(capitalistvaluesaverage)
 
 
-var dat=[...socialistcountriesmarxistleninistvalues,...socialdemocraticcountriesvalues,...capitalistvalues]
-var labels=[...socialistcountriesmarxistleninistlabels,...socialdemocraticcountrieslabels,...capitalistlabels]
+var dat=[...socialistcountriesmarxistleninistvalues,...formersocialistcountriesvalues,...socialdemocraticcountriesvalues,...capitalistvalues]
+var labels=[...socialistcountriesmarxistleninistlabels,...formersocialistcountrieslabels,...socialdemocraticcountrieslabels,...capitalistlabels]
 for (var x=0;x<dat.length;x++){
   console.log(dat[x],labels[x])
 }
@@ -338,21 +354,23 @@ for(var x of socialdemocraticcountriesvalues){
 for(var y of capitalistvalues){
   dataobject.datasets[0].backgroundColor.push("blue")
 }
+for(var y of formersocialistcountriesvalues){
+  dataobject.datasets[0].backgroundColor.push("orange")
+}
 console.log(dataobject.datasets[0].backgroundColor)
 
 var dataobjecttwo= {
-    labels: ["Marxist-Leninist","Democratic Socialist","Capitalist"],
+  labels: ["Marxist-Leninist","Democratic Socialist","Capitalist","Formerly-Socialist"],
     datasets: [{
       label: `Averages`,
       data: [socialistcountriesmarxistleninistvaluesaverage,
       socialdemocraticcountriesvaluesaverage,
-      capitalistvaluesaverage],
-      backgroundColor: ["red","yellow","blue"],
+      capitalistvaluesaverage,
+    formersocialistcountriesvaluesaverage],
+      backgroundColor: ["red","yellow","blue","orange"],
       borderWidth: 1
     }]
   }
-
-
        setAveragesData(dataobjecttwo)
        setGraphSize(dat.length*20)
         setData(dataobject)
@@ -489,6 +507,16 @@ console.log("displayastatallcountries",displayastatallcountries)
 
     </section>
     </div>
+    <p className="explanation">In general, socialist countries are much more humanistic than capitalist countries in almost every way. Their standards
+    of mental and physical health are better, the cost of living is cheaper (particularly housing), wages rise much more rapidly,
+    the rates of unemployment are lower, university cheaper. It is much easier to find and change career, workers can be more brave
+    about standing up and criticising the leaders of the organizations they work with, because being fired is not such a tragedy.
+    Socialist countries have much fewer homeless people. Their criminal justice system is usually more humane and this results
+    in lower rates of violent crime and criminal re-ooffending.
+     In the last century, Socialist states have risen from being very poor oppressed colonized countries, to becoming very prosperous.
+     Socialist countries have achieved this common wealth by much more humane and ethical means than the empires of Europe. They do
+     not invade poorer or weaker countries in order to steal resources or crush working class revolutions. Instead they give assistance
+     to try to form mutually beneficial relationships.</p>
     </>
   )}
 
