@@ -605,7 +605,7 @@ for (let x=0;x<countries.length;x++){
         if(rate[x]){
       await db.query(
          `UPDATE countries
-          SET poverty_gap_at_$1.90_a_day = ${rate[x]}
+          SET poverty_gap_at_190cents_a_day = ${rate[x]}
           WHERE name = '${count}';`
       )
     }
@@ -695,7 +695,4 @@ for (let x=0;x<countries.length;x++){
   }
 
     await browser.close()
-
-
-
 })()

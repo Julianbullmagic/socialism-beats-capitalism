@@ -54,7 +54,7 @@ useEffect(()=>{
     var filtereddatacopythree=filtereddatacopytwo.filter(item=>!(item==="fossil_fuel_consumption_percentage_of_total_energy_consumption"))
 
 
-console.log("filtereddatacopy",filtereddatacopy)
+console.log("statLabels",filtereddatacopy)
    setStatLabels(filtereddatacopythree)
  }).catch(err=>console.log(err))
 
@@ -513,6 +513,9 @@ console.log("displayastatallcountries",displayastatallcountries)
     about standing up and criticising the leaders of the organizations they work with, because being fired is not such a tragedy.
     Socialist countries have much fewer homeless people. Their criminal justice system is usually more humane and this results
     in lower rates of violent crime and criminal re-ooffending.
+    Socialist countries are more feministic, they often have a higher proportion of women in parliament, higher female
+    enrolement in tertiary education, heavily subsidised childcare and women do less unpaid housework. There is better
+    access to contraception and fewer teenage pregnancies.
      In the last century, Socialist states have risen from being very poor oppressed colonized countries, to becoming very prosperous.
      Socialist countries have achieved this common wealth by much more humane and ethical means than the empires of Europe. They do
      not invade poorer or weaker countries in order to steal resources or crush working class revolutions. Instead they give assistance
