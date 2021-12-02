@@ -278,83 +278,424 @@ if (process.env.CLEARDB_DATABASE_URL) {
     	"Åland Islands"
     ];
 
-
     const browser = await puppeteer.launch({ headless: false });;
     const page = await browser.newPage();
-    await page.goto('https://en.wikipedia.org/wiki/Wind_power_by_country');
-    var countries = await page.$$eval('table.wikitable tbody tr td[style="text-align:left"]', links => { return links.map(link => link.textContent)})
-    var rate = await page.$$eval('table.wikitable tbody tr td[style="text-align:left"]+td+td', links => { return links.map(link => link.textContent)})
 
+
+
+// // wind_power_mega_watts
+//         await page.goto('https://en.wikipedia.org/wiki/Wind_power_by_country');
+//         await page.waitForTimeout(10000)
+//
+//         var countries = await page.$$eval('td span.flagicon+a', links => { return links.map(link => link.textContent)})
+//         console.log(countries)
+//         var rate = await page.$$eval('td[align="left"]+td+td+td+td+td+td+td+td', links => { return links.map(link => link.textContent)})
+//         console.log(rate)
+//         // rate=rate.slice(0,countries.length)
+//         console.log(countries.length,rate.length)
+//
+//     for (let x=0;x<countries.length;x++){
+//       console.log("DATA",countries[x],rate[x])
+//       // let count=countries[x].replace(/'/g,' ')
+//       // await db.query(
+//       //    `UPDATE countries
+//       //     SET wind_power_mega_watts = ${rate[x]}
+//       //     WHERE name = '${count}';`
+//       // )
+//     }
+
+
+// renewable_electricity_output_percentage
+    await page.goto('https://data.worldbank.org/indicator/EG.ELC.RNEW.ZS?view=chart');
+    await page.waitForTimeout(10000)
+
+    var countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
     console.log(countries)
+    var rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate.shift();
+    // console.log(countries)
     console.log(rate)
-    console.log(countries.length)
-    console.log(rate.length)
+    rate=rate.slice(0,countries.length)
+    console.log(countries.length,rate.length)
 
-    var windpowerobject={}
-    for (var x=0;x<rate.length;x++){
-      windpowerobject[`${countries[x].toLowerCase()}`]=Number(rate[x])
-    }
-    console.log(windpowerobject)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+  await db.query(
+     `UPDATE countries
+      SET renewable_electricity_output_percentage = ${rate[x]}
+      WHERE name = '${count}';`
+  )
+}
 
-    await page.goto('https://en.wikipedia.org/wiki/Solar_power_by_country');
-    var countries = await page.$$eval('table.wikitable tbody tr td[align="left"]>span[class="flagicon"]+a[title]', links => { return links.map(link => link.textContent)})
-    countries=countries.filter(item=>item)
-    var rate = await page.$$eval('table.wikitable tbody tr td[align="left"]+td+td+td+td+td+td+td+td+td+td', links => { return links.map(link => link.textContent)})
-    rate=rate.map(item=>{return item.slice(0,-1)})
 
-    rate=rate.map(item=>{return Number(item)})
 
-    countries=countries.slice(0,-11)
+//
+    await page.goto('https://data.worldbank.org/indicator/EG.ELC.HYRO.ZS');
+    await page.waitForTimeout(10000)
+
+    countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
     console.log(countries)
+    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate.shift();
+    // console.log(countries)
     console.log(rate)
-    console.log(countries.length)
-    console.log(rate.length)
-
-    var solarpowerobjectmegawatts={}
-    for (var x=0;x<rate.length;x++){
-      if(rate[x]>0){
-        solarpowerobjectmegawatts[`${countries[x].toLowerCase()}`]=rate[x]
+    rate=rate.slice(0,countries.length)
+    console.log(countries.length,rate.length)
+    for (let x=0;x<countries.length;x++){
+      console.log("DATA",countries[x],rate[x])
+      let count=countries[x].replace(/'/g,' ')
+      if(rate[x]){
+        await db.query(
+           `UPDATE countries
+            SET electricity_production_from_hydroelectric_percentage_total = ${rate[x]}
+            WHERE name = '${count}';`
+        )
       }
     }
-    console.log(solarpowerobjectmegawatts)
 
 
 
-let cancer=countriesObject[`${count}`]['cancerdeathsperhundredthousand']
+// renewable_energy_consumption_percentage
+    await page.goto('https://data.worldbank.org/indicator/EG.FEC.RNEW.ZS?view=chart');
+    countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+    console.log(countries)
+    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate.shift();
+    // console.log(countries)
+    console.log(rate)
+    rate=rate.slice(0,countries.length)
+    console.log(countries.length,rate.length)
+    for (let x=0;x<countries.length;x++){
+      console.log("DATA",countries[x],rate[x])
+      let count=countries[x].replace(/'/g,' ')
+        if(rate[x]){
+      await db.query(
+         `UPDATE countries
+          SET renewable_energy_consumption_percentage = ${rate[x]}
+          WHERE name = '${count}';`
+      )
+    }
+    }
 
-// console.log(countriesObject[`${count}`])
-// db.query(
-//    `UPDATE countries
-//     SET cancer_deaths_per_hundred_thousand = ${cancer||null},
-//     heart_disease_deaths_per_hundred_thousand= ${heart||null},
-//     diarrhoea_deaths_per_hundred_thousand=${diarrhoea||null},
-//     diabetes_death_rate_per_hundred_thousand=${diabetes||null},
-//     drug_related_deaths_per_hundred_thousand=${drug||null},
-//     home_ownership_rate=${homeownership||null},
-//     homelessness_rate=${homelessness||null},
-//     litres_of_alcohol_per_person_per_year=${litres||null},
-//     obesity_percentage=${obesity||null}
-//     WHERE name = '${count}';`
-// )
-// console.log("inserted into database")
 
+
+
+
+
+// CO2_emissions_metric_tons_per_capita
+    await page.goto('https://data.worldbank.org/indicator/EN.ATM.CO2E.PC?view=chart');
+    await page.waitForTimeout(10000)
+
+    countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+    console.log(countries)
+    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate.shift();
+    // console.log(countries)
+    console.log(rate)
+    rate=rate.slice(0,countries.length)
+    console.log(countries.length,rate.length)
+
+    for (let x=0;x<countries.length;x++){
+      console.log("DATA",countries[x],rate[x])
+      let count=countries[x].replace(/'/g,' ')
+        if(rate[x]){
+      await db.query(
+         `UPDATE countries
+          SET CO2_emissions_metric_tons_per_capita = ${rate[x]}
+          WHERE name = '${count}';`
+      )
+    }
+  }
+
+
+
+// government_expenditure_education_percentage_of_expenditure
+    await page.goto('https://data.worldbank.org/indicator/SE.XPD.TOTL.GB.ZS?view=chart');
+    await page.waitForTimeout(10000)
+
+    countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+    console.log(countries)
+    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate.shift();
+    // console.log(countries)
+    console.log(rate)
+    rate=rate.slice(0,countries.length)
+    console.log(countries.length,rate.length)
+    for (let x=0;x<countries.length;x++){
+      console.log("DATA",countries[x],rate[x])
+      let count=countries[x].replace(/'/g,' ')
+        if(rate[x]){
+      await db.query(
+         `UPDATE countries
+          SET government_expenditure_education_percentage_of_expenditure = ${rate[x]}
+          WHERE name = '${count}';`
+      )
+    }
+  }
+
+
+// government_expenditure_education_percentage_of_GDP
+    await page.goto('https://data.worldbank.org/indicator/SE.XPD.TOTL.GD.ZS?view=chart');
+    await page.waitForTimeout(10000)
+
+    countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+    console.log(countries)
+    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate.shift();
+    // console.log(countries)
+    console.log(rate)
+    rate=rate.slice(0,countries.length)
+    console.log(countries.length,rate.length)
+    for (let x=0;x<countries.length;x++){
+      console.log("DATA",countries[x],rate[x])
+      let count=countries[x].replace(/'/g,' ')
+        if(rate[x]){
+      await db.query(
+         `UPDATE countries
+          SET government_expenditure_education_percentage_of_GDP = ${rate[x]}
+          WHERE name = '${count}';`
+      )
+    }
+  }
+
+// terrestrial_and_marine_protected_areas_percentage
+    await page.goto('https://data.worldbank.org/indicator/ER.PTD.TOTL.ZS?view=chart');
+    await page.waitForTimeout(10000)
+
+    countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+    console.log(countries)
+    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate.shift();
+    // console.log(countries)
+    console.log(rate)
+    rate=rate.slice(0,countries.length)
+    console.log(countries.length,rate.length)
+    for (let x=0;x<countries.length;x++){
+      console.log("DATA",countries[x],rate[x])
+      let count=countries[x].replace(/'/g,' ')
+        if(rate[x]){
+      await db.query(
+         `UPDATE countries
+          SET terrestrial_and_marine_protected_areas_percentage = ${rate[x]}
+          WHERE name = '${count}';`
+      )
+    }
+  }
+
+
+
+
+// contraceptive_prevalence_percentage_of_women
+    await page.goto('https://data.worldbank.org/indicator/SP.DYN.CONU.ZS?view=chart');
+    await page.waitForTimeout(10000)
+
+    countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+    console.log(countries)
+    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate.shift();
+    // console.log(countries)
+    console.log(rate)
+    rate=rate.slice(0,countries.length)
+    console.log(countries.length,rate.length)
+    for (let x=0;x<countries.length;x++){
+      console.log("DATA",countries[x],rate[x])
+      let count=countries[x].replace(/'/g,' ')
+        if(rate[x]){
+      await db.query(
+         `UPDATE countries
+          SET contraceptive_prevalence_percentage_of_women = ${rate[x]}
+          WHERE name = '${count}';`
+      )
+    }
+  }
+
+
+
+
+// time_spent_on_unpaid_domestic_and_care_work_female_percentage
+    await page.goto('https://data.worldbank.org/indicator/SG.TIM.UWRK.FE?view=chart');
+    await page.waitForTimeout(10000)
+
+    countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+    console.log(countries)
+    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate.shift();
+    // console.log(countries)
+    console.log(rate)
+    rate=rate.slice(0,countries.length)
+    console.log(countries.length,rate.length)
+    for (let x=0;x<countries.length;x++){
+      console.log("DATA",countries[x],rate[x])
+      let count=countries[x].replace(/'/g,' ')
+        if(rate[x]){
+      await db.query(
+         `UPDATE countries
+          SET time_spent_on_unpaid_domestic_and_care_work_female_percentage = ${rate[x]}
+          WHERE name = '${count}';`
+      )
+    }
+  }
+
+
+
+// income_share_highest_20_percent
+    await page.goto('https://data.worldbank.org/indicator/SI.DST.05TH.20?view=chart');
+    await page.waitForTimeout(10000)
+
+    countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+    console.log(countries)
+    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate.shift();
+    // console.log(countries)
+    console.log(rate)
+    rate=rate.slice(0,countries.length)
+    console.log(countries.length,rate.length)
+    for (let x=0;x<countries.length;x++){
+      console.log("DATA",countries[x],rate[x])
+      let count=countries[x].replace(/'/g,' ')
+        if(rate[x]){
+      await db.query(
+         `UPDATE countries
+          SET income_share_highest_20_percent = ${rate[x]}
+          WHERE name = '${count}';`
+      )
+    }
 }
-await browser.close()
+
+// income_share_highest_10_percent
+    await page.goto('https://data.worldbank.org/indicator/SI.DST.10TH.10?view=chart');
+    await page.waitForTimeout(10000)
+
+    countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+    console.log(countries)
+    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate.shift();
+    // console.log(countries)
+    console.log(rate)
+    rate=rate.slice(0,countries.length)
+    console.log(countries.length,rate.length)
+    for (let x=0;x<countries.length;x++){
+      console.log("DATA",countries[x],rate[x])
+      let count=countries[x].replace(/'/g,' ')
+        if(rate[x]){
+      await db.query(
+         `UPDATE countries
+          SET income_share_highest_10_percent = ${rate[x]}
+          WHERE name = '${count}';`
+      )
+    }
+  }
+
+// poverty_gap_at_$1.90_a_day
+    await page.goto('https://data.worldbank.org/indicator/SI.POV.GAPS?view=chart');
+    await page.waitForTimeout(10000)
+
+    countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+    console.log(countries)
+    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate.shift();
+    // console.log(countries)
+    console.log(rate)
+    rate=rate.slice(0,countries.length)
+    console.log(countries.length,rate.length)
+    for (let x=0;x<countries.length;x++){
+      console.log("DATA",countries[x],rate[x])
+      let count=countries[x].replace(/'/g,' ')
+        if(rate[x]){
+      await db.query(
+         `UPDATE countries
+          SET poverty_gap_at_$1.90_a_day = ${rate[x]}
+          WHERE name = '${count}';`
+      )
+    }
+  }
+
+// population_living_in_slums_percentage_urban_population
+    await page.goto('https://data.worldbank.org/indicator/EN.POP.SLUM.UR.ZS?view=chart');
+    await page.waitForTimeout(10000)
+
+    countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+    console.log(countries)
+    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate.shift();
+    // console.log(countries)
+    console.log(rate)
+    rate=rate.slice(0,countries.length)
+    console.log(countries.length,rate.length)
+    for (let x=0;x<countries.length;x++){
+      console.log("DATA",countries[x],rate[x])
+      let count=countries[x].replace(/'/g,' ')
+        if(rate[x]){
+      await db.query(
+         `UPDATE countries
+          SET population_living_in_slums_percentage_urban_population = ${rate[x]}
+          WHERE name = '${count}';`
+      )
+    }
+  }
+
+
+
+
+
+
+// income_share_held_by_lowest_10_percent
+    await page.goto('https://data.worldbank.org/indicator/SI.DST.FRST.10?view=chart');
+    await page.waitForTimeout(10000)
+
+    countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+    console.log(countries)
+    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate.shift();
+    // console.log(countries)
+    console.log(rate)
+    rate=rate.slice(0,countries.length)
+    console.log(countries.length,rate.length)
+    for (let x=0;x<countries.length;x++){
+      console.log("DATA",countries[x],rate[x])
+      let count=countries[x].replace(/'/g,' ')
+        if(rate[x]){
+      await db.query(
+         `UPDATE countries
+          SET income_share_held_by_lowest_10_percent = ${rate[x]}
+          WHERE name = '${count}';`
+      )
+    }
+  }
+
+
+
+
+
+
+
+// hospital_beds_per_thousand
+    await page.goto('https://data.worldbank.org/indicator/SH.MED.BEDS.ZS?view=chart');
+    await page.waitForTimeout(10000)
+
+    countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+    console.log(countries)
+    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate.shift();
+    // console.log(countries)
+    console.log(rate)
+    rate=rate.slice(0,countries.length)
+    console.log(countries.length,rate.length)
+    for (let x=0;x<countries.length;x++){
+      console.log("DATA",countries[x],rate[x])
+      let count=countries[x].replace(/'/g,' ')
+        if(rate[x]){
+      await db.query(
+         `UPDATE countries
+          SET hospital_beds_per_thousand = ${rate[x]}
+          WHERE name = '${count}';`
+      )
+    }
+  }
+
+    await browser.close()
+
+
 
 })()
-
-
-
-
-if(process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.resolve(__dirname, "./client/build")));
-  app.get("*", function (request, response) {
-    response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-  });
-}
-
-app.listen(process.env.PORT||5000, () => {
-  console.log("Yey, your server is running on port 5000");
-});
-
-var urls=["https://www.prisonstudies.org/highest-to-lowest/prison-population-total?field_region_taxonomy_tid=All","https://en.wikipedia.org/wiki/Rape_statistics","https://data.worldbank.org/indicator/EG.ELC.HYRO.ZS","https://knoema.com/atlas/ranks/Rape-rate","https://data.worldbank.org/indicator/EN.ATM.CO2E.PC?view=chart","https://data.worldbank.org/indicator/EG.ELC.RNEW.ZS?view=chart","https://data.worldbank.org/indicator/EG.FEC.RNEW.ZS?view=chart","https://data.worldbank.org/indicator/SE.XPD.TOTL.GB.ZS?view=chart","https://data.worldbank.org/indicator/SE.XPD.TOTL.GD.ZS?view=chart","https://data.worldbank.org/indicator/ER.PTD.TOTL.ZS?view=chart","https://data.worldbank.org/indicator/SP.DYN.CONU.ZS?view=chart","https://data.worldbank.org/indicator/SG.TIM.UWRK.FE?view=chart","https://data.worldbank.org/indicator/SH.MED.BEDS.ZS?view=chart","https://data.worldbank.org/indicator/SI.DST.10TH.10?view=chart","https://data.worldbank.org/indicator/SI.DST.FRST.10?view=chart","https://data.worldbank.org/indicator/SI.POV.GAPS?view=chart","https://data.worldbank.org/indicator/EN.POP.SLUM.UR.ZS?view=chart","https://data.worldbank.org/indicator/SI.DST.05TH.20?view=chart","https://en.wikipedia.org/wiki/List_of_countries_by_incarceration_rate","https://en.wikipedia.org/wiki/Rape_statistics","https://data.worldbank.org/indicator/VC.IHR.PSRC.P5",]

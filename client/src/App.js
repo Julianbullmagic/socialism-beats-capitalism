@@ -529,11 +529,29 @@ var percentages=["home_ownership_rate",
 "research_and_development_expenditure_percent_of_gpd",
 "percentage_women_in_parliament",
 "fossil_fuel_consumption_percentage_of_total_energy_consumption",
+`renewable_electricity_output_percentage`,
+`electricity_production_from_hydroelectric_percentage_total`,
+`renewable_energy_consumption_percentage`,
+`population_living_in_slums_percentage_urban_population`,
+`income_share_held_by_lowest_10_percent`,
+`income_share_highest_10_percent`,
+`income_share_highest_20_percent`,
+`poverty_gap_at_$1.90_a_day`,
+`government_expenditure_education_percentage_of_expenditure`,
+`government_expenditure_education_percentage_of_GDP`,
+`terrestrial_and_marine_protected_areas_percentage`,
+`contraceptive_prevalence_percentage_of_women`,
+`time_spent_on_unpaid_domestic_and_care_work_female_percentage`
 ]
+
+
+var perthousand=["adolescent_birth_rate_per_thousand",
+  `hospital_beds_per_thousand`]
 
 
 var otherstatistics=[
   "homelessness_rate",
+  `CO2_emissions_metric_tons_per_capita`,
   "intentional_homicide_rate_per_hundred_thousand",
   "incarceration_rate_per_hundred_thousand",
   "litres_of_alcohol_per_person_per_year",
@@ -554,4 +572,5 @@ var otherstatistics=[
   "safe_sanitation_services",
   "prison_population_per_hundred_thousand",
   "suicide_rate_male",
+  `hospital_beds_per_thousand`,
   "suicide_rate_female"]
