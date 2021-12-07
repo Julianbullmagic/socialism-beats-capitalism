@@ -283,213 +283,163 @@ if (process.env.CLEARDB_DATABASE_URL) {
     	"Åland Islands"
     ];
 
+    const browser = await puppeteer.launch({ headless: false });;
+    const page = await browser.newPage();
 
-    var countriesObject={}
+//
+// // government_expenditure_education_percentage_of_expenditure
+//     await page.goto('https://data.worldbank.org/indicator/SE.XPD.TOTL.GB.ZS?view=chart');
+//     await page.waitForTimeout(10000)
+//
+//     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+//     console.log(countries)
+//     rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+//     rate.shift();
+//     // console.log(countries)
+//     console.log(rate)
+//     rate=rate.slice(0,countries.length)
+//     console.log(countries.length,rate.length)
+//     for (let x=0;x<countries.length;x++){
+//       console.log("DATA",countries[x],rate[x])
+//       let count=countries[x].replace(/'/g,' ')
+//         if(rate[x]){
+//       await db.query(
+//          `REPLACE INTO countries
+//           SET government_expenditure_education_percentage_of_expenditure = ${rate[x]}
+//           WHERE name = '${count}';`
+//       )
+//     }
+//   }
+//
+//
+// // government_expenditure_education_percentage_of_GDP
+//     await page.goto('https://data.worldbank.org/indicator/SE.XPD.TOTL.GD.ZS?view=chart');
+//     await page.waitForTimeout(10000)
+//
+//     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+//     console.log(countries)
+//     rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+//     rate.shift();
+//     // console.log(countries)
+//     console.log(rate)
+//     rate=rate.slice(0,countries.length)
+//     console.log(countries.length,rate.length)
+//     for (let x=0;x<countries.length;x++){
+//       console.log("DATA",countries[x],rate[x])
+//       let count=countries[x].replace(/'/g,' ')
+//         if(rate[x]){
+//       await db.query(
+//          `REPLACE INTO countries
+//           SET government_expenditure_education_percentage_of_GDP = ${rate[x]}
+//           WHERE name = '${count}';`
+//       )
+//     }
+//   }
 
-    for (var country of countryList){
-      var count=country.toLowerCase()
-      countriesObject[`${count}`]={}
+// terrestrial_and_marine_protected_areas_percentage
+//     await page.goto('https://data.worldbank.org/indicator/ER.PTD.TOTL.ZS?view=chart');
+//     await page.waitForTimeout(10000)
+//
+//     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+//     console.log(countries)
+//     rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+//     rate.shift();
+//     // console.log(countries)
+//     console.log(rate)
+//     rate=rate.slice(0,countries.length)
+//     console.log(countries.length,rate.length)
+//     for (let x=0;x<countries.length;x++){
+//       console.log("DATA",countries[x],rate[x])
+//       let count=countries[x].replace(/'/g,' ')
+//         if(rate[x]){
+//       await db.query(
+//          `REPLACE INTO countries
+//           SET terrestrial_and_marine_protected_areas_percentage = ${rate[x]}
+//           WHERE name = '${count}';`
+//       )
+//     }
+//   }
+//
+//
+//
+//
+// // contraceptive_prevalence_percentage_of_women
+//     await page.goto('https://data.worldbank.org/indicator/SP.DYN.CONU.ZS?view=chart');
+//     await page.waitForTimeout(10000)
+//
+//     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+//     console.log(countries)
+//     rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+//     rate.shift();
+//     // console.log(countries)
+//     console.log(rate)
+//     rate=rate.slice(0,countries.length)
+//     console.log(countries.length,rate.length)
+//     for (let x=0;x<countries.length;x++){
+//       console.log("DATA",countries[x],rate[x])
+//       let count=countries[x].replace(/'/g,' ')
+//         if(rate[x]){
+//       await db.query(
+//          `REPLACE INTO countries
+//           SET contraceptive_prevalence_percentage_of_women = ${rate[x]}
+//           WHERE name = '${count}';`
+//       )
+//     }
+//   }
+//
+//
+//
+
+// time_spent_on_unpaid_domestic_and_care_work_female_percentage
+  //   await page.goto('https://data.worldbank.org/indicator/SG.TIM.UWRK.FE?view=chart');
+  //   await page.waitForTimeout(10000)
+  //
+  //   countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+  //   console.log(countries)
+  //   rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+  //   rate.shift();
+  //   // console.log(countries)
+  //   console.log(rate)
+  //   rate=rate.slice(0,countries.length)
+  //   console.log(countries.length,rate.length)
+  //   for (let x=0;x<countries.length;x++){
+  //     console.log("DATA",countries[x],rate[x])
+  //     let count=countries[x].replace(/'/g,' ')
+  //       if(rate[x]){
+  //     await db.query(
+  //        `REPLACE INTO countries
+  //         SET time_spent_on_unpaid_domestic_and_care_work_female_percentage = ${rate[x]}
+  //         WHERE name = '${count}';`
+  //     )
+  //   }
+  // }
+
+
+
+// income_share_highest_20_percent
+    await page.goto('https://data.worldbank.org/indicator/SI.DST.05TH.20?view=chart');
+    await page.waitForTimeout(10000)
+
+    countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+    console.log(countries)
+    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate.shift();
+    // console.log(countries)
+    console.log(rate)
+    rate=rate.slice(0,countries.length)
+    console.log(countries.length,rate.length)
+    for (let x=0;x<countries.length;x++){
+      console.log("DATA",countries[x],rate[x])
+      let count=countries[x].replace(/'/g,' ')
+        if(rate[x]){
+      await db.query(
+         `REPLACE INTO countries
+          SET income_share_highest_20_percent = ${rate[x]}
+          WHERE name = '${count}';`
+      )
     }
-
-
-
-
-
-
-
-const browser = await puppeteer.launch({ headless: false });;
-const page = await browser.newPage();
-await page.goto('https://data.oecd.org/energy/renewable-energy.htm');
-await page.click('a[data-type="table"]')
-await page.waitForSelector('tr th')
-var countries = await page.$$eval('tr th.table-chart-tbody-th', links => { return links.map(link => link.textContent)})
-var rate = await page.$$eval('tr td:first-of-type', links => { return links.map(link => link.textContent)})
-rate=rate.map(item=>{return item.replace(/[^\d.-]/g, '')})
-rate=rate.map(item=>{return Number(item)})
-
-console.log(countries,countries.length)
-console.log(rate,rate.length)
-
-var renewableenergy={}
-for (var x=0;x<rate.length;x++){
-  renewableenergy[`${countries[x]}`]=rate[x]
 }
-console.log(renewableenergy)
 
 
-await browser.close()
-
-    var population=await fetchUNDATA(44206)
-    console.log("population",population)
-
-var countriesdata=await Axios.get('https://services1.arcgis.com/0MSEUqKaxRlEPj5g/arcgis/rest/services/ncov_cases2_v1/FeatureServer/2/query?where=1%3D1&outFields=*&outSR=4326&f=json')
-.then(json=>{
-var attributes=JSON.parse(JSON.stringify(json['data']['features']))
-var data=attributes.map(item=>{return item.attributes})
-console.log(data)
-return data
-})
-for (let country in countriesObject){
-  for (let count of countriesdata){
-    if(count.Country_Region.toLowerCase()==country){
-      var coviddeathsperhundredthousand=(count[`Deaths`]/(population[`${country}`]*1000000))*100000
-      countriesObject[`${country}`]['coviddeathsperhundredthousand']=coviddeathsperhundredthousand
-    }
-  }
-}
-console.log(countriesObject)
-
-var totalunemploymentrate=await fetchUNDATA(140606)
-console.log("unemloyment",totalunemploymentrate)
-
-var infantmortalityperthousand=await fetchUNDATA(57206)
-console.log("infantmortalityperthousand",infantmortalityperthousand)
-
-var lifeexpectancy=await fetchUNDATA(69206)
-console.log(lifeexpectancy,"lifeexpectancy")
-
-var prisonpopulation=await fetchUNDATA(128306)
-console.log(prisonpopulation,"prisonpopulation")
-
-var homiciderate=await fetchUNDATA(61006)
-console.log(homiciderate,"homiciderate")
-
-var co2emissions=await fetchUNDATA(195606)
-console.log(co2emissions,"co2emissions")
-
-
-for (var country in countriesObject){
-  let count=country.toLowerCase()
-
-  for (let x in homiciderate){
-    if(x.toLowerCase()==count){
-      if(countriesObject[`${x}`]){
-        countriesObject[`${count}`][`homiciderate`]=homiciderate[`${x}`]
-        console.log("HOMICIDE RATE",homiciderate[`${x}`],countriesObject[`${count}`][`homiciderate`])
-      }
-    }
-  }
-
-  for (let x in lifeexpectancy){
-    if(x.toLowerCase()==count){
-      if(countriesObject[`${x}`]){
-        countriesObject[`${count}`][`lifeexpectancy`]=lifeexpectancy[`${x}`]
-      }
-    }
-  }
-
-  for (let x in infantmortalityperthousand){
-    if(x.toLowerCase()==count){
-      if(countriesObject[`${x}`]){
-        countriesObject[`${count}`][`infantmortalityperthousand`]=infantmortalityperthousand[`${x}`]
-      }
-    }
-  }
-
-  for (let x in totalunemploymentrate){
-    if(x.toLowerCase()==count){
-      if(countriesObject[`${x}`]){
-        countriesObject[`${count}`][`totalunemploymentrate`]=totalunemploymentrate[`${x}`]
-      }
-    }
-  }
-
-  for (let x in renewableenergy){
-    if(x.toLowerCase()==count){
-      console.log(x,renewableenergy[`${x}`])
-
-        countriesObject[`${count}`][`renewableenergy`]=renewableenergy[`${x}`]
-    }
-  }
-
-  for (let x in co2emissions){
-    if(x.toLowerCase()==count){
-      if(countriesObject[`${x}`]){
-        countriesObject[`${count}`][`co2emissions`]=co2emissions[`${x}`]
-      }
-    }
-  }
-  for (let x in prisonpopulation){
-    if(x.toLowerCase()==count){
-      if(countriesObject[`${x}`]){
-        countriesObject[`${count}`][`prisonpopulation`]=prisonpopulation[`${x}`]
-      }
-    }
-  }
-
-
-
-  let renewable=countriesObject[`${count}`][`renewableenergy`]
-  let prison=countriesObject[`${count}`][`prisonpopulation`]
-  let covid= countriesObject[`${count}`][`totalunemploymentrate`]
-  let homicide=countriesObject[`${count}`][`homiciderate`]
-  let expectancy=countriesObject[`${count}`][`lifeexpectancy`]
-  let infant=countriesObject[`${count}`][`infantmortalityperthousand`]
-  let unemployment=countriesObject[`${count}`][`totalunemploymentrate`]
-  let co2=countriesObject[`${count}`][`co2emissions`]
-  console.log(countriesObject[`${count}`])
-
-db.query(
-   `UPDATE countries
-    SET intentional_homicide_rate_per_hundred_thousand= ${homicide||null},
-    prison_population_per_hundred_thousand=${prison||null},
-    renewable_energy_percentage= ${renewable||null},
-    covid_deaths_per_hundred_thousand=${covid||null},
-    life_expectancy=${expectancy||null},
-    unemployment=${unemployment||null},
-    infant_mortality=${infant*100||null},
-    co2_emissions=${co2||null}
-    WHERE name = '${count}';`
-)
-console.log("inserted into database")
-
-}
+    await browser.close()
 })()
-
-
-async function fetchUNDATA(indicator){
-  var d = new Date();
-var n = d.getFullYear();
-
-  for (var x=n;x>2000;x--){
-    var data=await Axios.get(`http://ec2-54-174-131-205.compute-1.amazonaws.com/API/HDRO_API.php/indicator_id=${indicator}/year=${x}`)
-    .then(json=>{
-    var data=getUNData(json.data,indicator,x)
-    return data
-    })
-
-    let keys=Object.keys(data)
-    // console.log(keys.length)
-    if(keys.length>100){
-      return data
-    }
-
-  }
-}
-
-function getUNData(data,indicator,year){
-
-  var attributes=JSON.parse(JSON.stringify(data))
-  var data={}
-  for (let x in attributes.indicator_value){
-    for (let y in attributes.country_name){
-      if (x==y){
-        data[`${attributes['country_name'][`${y}`]}`.toLowerCase()]=attributes['indicator_value'][`${x}`][`${indicator}`][`${year}`]
-      }
-    }
-  }
-  return data
-}
-
-
-
-if(process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.resolve(__dirname, "./client/build")));
-  app.get("*", function (request, response) {
-    response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-  });
-}
-
-app.listen(process.env.PORT||5000, () => {
-  console.log("Yey, your server is running on port 5000");
-});

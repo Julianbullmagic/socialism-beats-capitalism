@@ -6,13 +6,15 @@ import * as zoom from 'chartjs-plugin-zoom'
 import Hammer from "hammerjs";
 
 
-var socialistcountriesmarxistleninist=["china","laos","north korea","cuba","viet nam"]
-var socialdemocraticcountries=["norway","sweden","finland","denmark","portugal","bolivia",
-"ecuador","peru","iceland","nicaragua","northern ireland","portugal","serbia","venezuela"]
+var socialistcountriesmarxistleninist=["china","laos","north korea","cuba","viet nam","vietnam"]
 
-var formersocialistcountries=["belarus","bosnia","herzegovina","croatia","macedonia","montenegro","serbiaMoldova",
+var socialdemocraticcountries=["norway","sweden","finland","denmark","portugal",
+"ecuador","peru","iceland","nicaragua","northern ireland","portugal","bolivia",
+"venezuela"]
+
+var formersocialistcountries=["belarus","bosnia","herzegovina","croatia","macedonia","montenegro","serbia","serbiaMoldova",
 "estonia","latvia","lithuania","kazakhstan","kyrgyzstan","tajikistan","turkmenistan","uzbekistan","russia",
-"armenia","azerbaijan","georgia","ukraine"]
+"armenia","azerbaijan","georgia","ukraine","libya"]
 
 console.log(references)
 
@@ -41,7 +43,7 @@ const { height, width } = useWindowDimensions()
 useEffect(()=>{
 
 
-  fetch('/getalldata')
+  fetch('http://localhost:5000/getalldata')
   .then(result=>result.json())
   .then(data=>{
     var datacopy=JSON.parse(JSON.stringify(data))
@@ -137,7 +139,7 @@ return datacopy
     }).catch((error) => {
   console.error('Error:', error);
 });
-        await fetch("/searchcountries/"+searchValue.current.value)
+        await fetch("http://localhost:5000/searchcountries/"+searchValue.current.value)
         .then(result=>result.json())
         .then(data=>{
           console.log(data[0])
@@ -247,7 +249,7 @@ setPercentageStats({})
 setOtherStats({})
   event.preventDefault()
   console.log("event.target",event.target.value)
-      await fetch("/searchstats/"+event.target.value)
+      await fetch("http://localhost:5000/searchstats/"+event.target.value)
       .then(result=>result.json())
       .then(data=>{
         console.log(data)
@@ -503,12 +505,48 @@ console.log("displayastatallcountries",displayastatallcountries)
         <label htmlFor='name'>Search for a particular stat for all countries</label>
         <select name="room" id="room" onChange={(e) => handleStatisticChange(e)}>
           {mappedstatistics}
+
+          <option key={1} style={{color: "red",fontWeight:"strong"}} value={null}>Health</option>
+          'cancer_deaths_per_hundred_thousand', 'heart_disease_deaths_per_hundred_thousand',
+          'drug_related_deaths_per_hundred_thousand','obesity_percentage', 'covid_deaths_per_hundred_thousand',
+          'life_expectancy', 'infant_mortality', 'adolescent_birth_rate_per_thousand',
+          'suicide_rate_male', 'suicide_rate_female', 'malnourishment_percentage', 'road_traffic_deaths',
+           'diarrhoea_deaths_per_hundred_thousand', 'diabetes_death_rate_per_hundred_thousand', 'tuberculosis_per_hundred_thousand',
+            'death_by_injury', 'underweight_children_percentage', 'hiv_prevalence',
+          <option key={2} style={{color: "red",fontWeight:"strong"}} value={null}>Environment</option>
+          'natural_resource_depletion','CO2_emissions_metric_tons_per_capita','terrestrial_and_marine_protected_areas_percentage',
+'threatened_fish_species', 'threatened_bird_species','threatened_mammal_species', 'threatened_plant_species',
+          <option key={3} style={{color: "red",fontWeight:"strong"}} value={null}>Crime</option>
+          'prison_population_per_hundred_thousand', 'intentional_homicide_rate_per_hundred_thousand',
+          <option key={4} style={{color: "red",fontWeight:"strong"}} value={null}>Economy</option>
+          'union_membership_percentage'
+           'home_ownership_rate', 'homelessness_rate', 'unemployment', 'income_share_highest_20_percent', 'income_share_highest_10_percent',
+            'poverty_gap_at_190cents_a_day', 'income_share_held_by_lowest_10_percent', 'GDP_growth_per_capita_percentage',
+            'vulnerable_employment_women', 'vulnerable_employment_men','gdp_per_capita',  'income_share_lowest_twenty_percent',
+             'cpia_social_equity_policies_average',  'time_required_to_start_business', 'annualized_average_income_growth_rate_per_capita',
+           <option key={4} style={{color: "red",fontWeight:"strong"}} value={null}>Education</option>
+            'gross_enrolement_tertiary_education_ratio','research_and_development_expenditure_percent_of_gpd',
+             'government_expenditure_education_percentage_of_expenditure', 'government_expenditure_education_percentage_of_GDP',
+          <option key={5} style={{color: "red",fontWeight:"strong"}} value={null}>Feminism</option>
+          'percentage_women_in_parliament', 'contraceptive_prevalence_percentage_of_women','time_spent_on_unpaid_domestic_and_care_work_female_percentage',
+           'labour_force_women_percentage', 'firms_with_some_female_ownership',
+          <option key={5} style={{color: "red",fontWeight:"strong"}} value={null}>Technology</option>
+          'medium_and_high_tech_manufacturing_value_added_percentage',
+          'research_and_development_expenditure_percent_of_gpd', 'medium_and_high-tech_manufacturing_value_added_percentage'
+           'high_technology_exports', 'rail_lines_total_km'
+          <option key={5} style={{color: "red",fontWeight:"strong"}} value={null}>Energy</option>
+          'renewable_energy_percentage', 'fossil_fuel_consumption_percentage_of_total_energy_consumption'
+          'renewable_electricity_output_percentage', 'electricity_production_from_hydroelectric_percentage_total', 'renewable_energy_consumption_percentage',
+
+          <option key={5} style={{color: "red",fontWeight:"strong"}} value={null}>Other</option>
+'refugee_population'
         </select>
 
     </section>
     </div>
-    <p className="explanation">In general, socialist countries are much more humanistic than capitalist countries in almost every way. Their standards
-    of mental and physical health are better, the cost of living is cheaper (particularly housing), wages rise much more rapidly,
+    <p className="explanation">Data from the World Bank, World Health Organization and United Nations Developement Programme
+    shows that in general, socialist countries are much more humanistic than capitalist countries in almost every way. Their
+    standards of mental and physical health are better, the cost of living is cheaper (particularly housing), wages rise much more rapidly,
     the rates of unemployment are lower, university cheaper. It is much easier to find and change career, workers can be more brave
     about standing up and criticising the leaders of the organizations they work with, because being fired is not such a tragedy.
     Socialist countries have much fewer homeless people. Their criminal justice system is usually more humane and this results
