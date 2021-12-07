@@ -78,7 +78,7 @@ app.get("/searchstats/:stat", (req, res) => {
 
 console.log(req.params.stat)
   db.query(
-    `SELECT ${stat},name,population FROM countries;`,
+    `SELECT ${stat},name,population FROM countries where ${stat} && population is not null;`,
     (err, result) => {
       if (err) {
         console.log(err);

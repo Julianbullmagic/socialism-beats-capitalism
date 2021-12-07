@@ -242,143 +242,156 @@ for (var s in datacopy){
 }
 
 async function handleStatisticChange(event) {
-  setCountryData({})
-setdisplayastatallcountries("block")
-setdisplaycountrycomparison('none')
-setPercentageStats({})
-setOtherStats({})
-  event.preventDefault()
-  console.log("event.target",event.target.value)
-      await fetch("http://localhost:5000/searchstats/"+event.target.value)
-      .then(result=>result.json())
-      .then(data=>{
-        console.log(data)
-var datacopy=JSON.parse(JSON.stringify(data))
-datacopy=datacopy.filter(item=>item[`${event.target.value}`])
+  if(event.target.value){
+    setCountryData({})
+  setdisplayastatallcountries("block")
+  setdisplaycountrycomparison('none')
+  setPercentageStats({})
+  setOtherStats({})
+    event.preventDefault()
+    console.log("event.target",event.target.value)
+        await fetch("http://localhost:5000/searchstats/"+event.target.value)
+        .then(result=>result.json())
+        .then(data=>{
+          console.log(data)
+  var datacopy=JSON.parse(JSON.stringify(data))
+  datacopy=datacopy.filter(item=>item[`${event.target.value}`])
 
 
 
-var socialistcountriesmarxistleninistvalues=[]
-var socialistcountriesmarxistleninistlabels=[]
+  var socialistcountriesmarxistleninistvalues=[]
+  var socialistcountriesmarxistleninistlabels=[]
 
-var socialdemocraticcountriesvalues=[]
-var socialdemocraticcountrieslabels=[]
+  var socialdemocraticcountriesvalues=[]
+  var socialdemocraticcountrieslabels=[]
 
-var formersocialistcountriesvalues=[]
-var formersocialistcountrieslabels=[]
+  var formersocialistcountriesvalues=[]
+  var formersocialistcountrieslabels=[]
 
-var capitalistvalues=[]
-var capitalistlabels=[]
+  var capitalistvalues=[]
+  var capitalistlabels=[]
 
-var socialistcountriesmarxistleninistvaluestimespopulution=[]
-var formersocialistcountriesvaluestimespopulation=[]
-var socialdemocraticcountriesvaluestimespopulation=[]
-var capitalistvaluestimespopulation=[]
+  var socialistcountriesmarxistleninistvaluestimespopulution=[]
+  var formersocialistcountriesvaluestimespopulation=[]
+  var socialdemocraticcountriesvaluestimespopulation=[]
+  var capitalistvaluestimespopulation=[]
 
-var formersocialistcountriestotalpopulation=0
-var socialistcountriesmarxistleninisttotalpopulation=0
-var socialdemocraticcountriestotalpopulation=0
-var capitalisttotalpopulation=0
+  var formersocialistcountriestotalpopulation=0
+  var socialistcountriesmarxistleninisttotalpopulation=0
+  var socialdemocraticcountriestotalpopulation=0
+  var capitalisttotalpopulation=0
 
 
-for (var x of datacopy){
-  if(x[`population`]>0){
-  if(socialistcountriesmarxistleninist.includes(x.name.toLowerCase())){
-    socialistcountriesmarxistleninistlabels.push(x[`name`])
-    socialistcountriesmarxistleninistvaluestimespopulution.push(x[`population`]*x[`${event.target.value}`])
-    socialistcountriesmarxistleninisttotalpopulation=socialistcountriesmarxistleninisttotalpopulation+x[`population`]
-    socialistcountriesmarxistleninistvalues.push(x[`${event.target.value}`])
-  }else if(socialdemocraticcountries.includes(x.name.toLowerCase()))
-  {
-    socialdemocraticcountrieslabels.push(x[`name`])
-    socialdemocraticcountriesvaluestimespopulation.push(x[`population`]*x[`${event.target.value}`])
-    socialdemocraticcountriestotalpopulation=socialdemocraticcountriestotalpopulation+x[`population`]
-    socialdemocraticcountriesvalues.push(x[`${event.target.value}`])
-  }else if(formersocialistcountries.includes(x.name.toLowerCase())){
-    capitalistlabels.push(x[`name`])
-    capitalistvaluestimespopulation.push(x[`population`]*x[`${event.target.value}`])
-    capitalisttotalpopulation=capitalisttotalpopulation+x[`population`]
-    capitalistvalues.push(x[`${event.target.value}`])
-  }else{
-    formersocialistcountrieslabels.push(x[`name`])
-    formersocialistcountriesvaluestimespopulation.push(x[`population`]*x[`${event.target.value}`])
-    formersocialistcountriestotalpopulation=formersocialistcountriestotalpopulation+x[`population`]
-    formersocialistcountriesvalues.push(x[`${event.target.value}`])
+  for (var x of datacopy){
+    if(x[`population`]>0){
+    if(socialistcountriesmarxistleninist.includes(x.name.toLowerCase())){
+      socialistcountriesmarxistleninistlabels.push(x[`name`])
+      socialistcountriesmarxistleninistvaluestimespopulution.push(x[`population`]*x[`${event.target.value}`])
+      socialistcountriesmarxistleninisttotalpopulation=socialistcountriesmarxistleninisttotalpopulation+x[`population`]
+      socialistcountriesmarxistleninistvalues.push(x[`${event.target.value}`])
+    }else if(socialdemocraticcountries.includes(x.name.toLowerCase()))
+    {
+      socialdemocraticcountrieslabels.push(x[`name`])
+      socialdemocraticcountriesvaluestimespopulation.push(x[`population`]*x[`${event.target.value}`])
+      socialdemocraticcountriestotalpopulation=socialdemocraticcountriestotalpopulation+x[`population`]
+      socialdemocraticcountriesvalues.push(x[`${event.target.value}`])
+    }else if(formersocialistcountries.includes(x.name.toLowerCase())){
+      formersocialistcountrieslabels.push(x[`name`])
+      formersocialistcountriesvaluestimespopulation.push(x[`population`]*x[`${event.target.value}`])
+      formersocialistcountriestotalpopulation=formersocialistcountriestotalpopulation+x[`population`]
+      formersocialistcountriesvalues.push(x[`${event.target.value}`])
+    }else{
+      capitalistlabels.push(x[`name`])
+      capitalistvaluestimespopulation.push(x[`population`]*x[`${event.target.value}`])
+      capitalisttotalpopulation=capitalisttotalpopulation+x[`population`]
+      capitalistvalues.push(x[`${event.target.value}`])
+    }
   }
-}
-}
-
-console.log(socialistcountriesmarxistleninistvaluestimespopulution)
-console.log(socialdemocraticcountriesvaluestimespopulation)
-console.log(capitalistvaluestimespopulation)
-
-console.log(socialistcountriesmarxistleninisttotalpopulation)
-console.log(socialdemocraticcountriestotalpopulation)
-console.log(capitalisttotalpopulation)
-
-formersocialistcountriesvaluestimespopulation=formersocialistcountriesvaluestimespopulation.reduce((a, b) => a + b)
-socialistcountriesmarxistleninistvaluestimespopulution=socialistcountriesmarxistleninistvaluestimespopulution.reduce((a, b) => a + b)
-socialdemocraticcountriesvaluestimespopulation=socialdemocraticcountriesvaluestimespopulation.reduce((a, b) => a + b)
-capitalistvaluestimespopulation=capitalistvaluestimespopulation.reduce((a, b) => a + b)
-
-var formersocialistcountriesvaluesaverage=formersocialistcountriesvaluestimespopulation/formersocialistcountriestotalpopulation
-var socialistcountriesmarxistleninistvaluesaverage=socialistcountriesmarxistleninistvaluestimespopulution/socialistcountriesmarxistleninisttotalpopulation
-var socialdemocraticcountriesvaluesaverage=socialdemocraticcountriesvaluestimespopulation/socialdemocraticcountriestotalpopulation
-var capitalistvaluesaverage=capitalistvaluestimespopulation/capitalisttotalpopulation
-
-console.log(formersocialistcountriesvaluesaverage)
-console.log(socialistcountriesmarxistleninistvaluesaverage)
-console.log(socialdemocraticcountriesvaluesaverage)
-console.log(capitalistvaluesaverage)
-
-
-var dat=[...socialistcountriesmarxistleninistvalues,...formersocialistcountriesvalues,...socialdemocraticcountriesvalues,...capitalistvalues]
-var labels=[...socialistcountriesmarxistleninistlabels,...formersocialistcountrieslabels,...socialdemocraticcountrieslabels,...capitalistlabels]
-for (var x=0;x<dat.length;x++){
-  console.log(dat[x],labels[x])
-}
-
-var dataobject= {
-    labels: [...labels],
-    datasets: [{
-      label: `${event.target.value}`,
-      data: [...dat],
-      backgroundColor: [],
-      borderWidth: 1
-    }]
   }
-for(var x of socialistcountriesmarxistleninistvalues){
-  dataobject.datasets[0].backgroundColor.push("red")
-}
-for(var x of socialdemocraticcountriesvalues){
-  dataobject.datasets[0].backgroundColor.push("yellow")
-}
-for(var y of capitalistvalues){
-  dataobject.datasets[0].backgroundColor.push("blue")
-}
-for(var y of formersocialistcountriesvalues){
-  dataobject.datasets[0].backgroundColor.push("orange")
-}
-console.log(dataobject.datasets[0].backgroundColor)
 
-var dataobjecttwo= {
-  labels: ["Marxist-Leninist","Democratic Socialist","Capitalist","Formerly-Socialist"],
-    datasets: [{
-      label: `Averages`,
-      data: [socialistcountriesmarxistleninistvaluesaverage,
-      socialdemocraticcountriesvaluesaverage,
-      capitalistvaluesaverage,
-    formersocialistcountriesvaluesaverage],
-      backgroundColor: ["red","yellow","blue","orange"],
-      borderWidth: 1
-    }]
+  console.log(socialistcountriesmarxistleninistvaluestimespopulution)
+  console.log(socialdemocraticcountriesvaluestimespopulation)
+  console.log(capitalistvaluestimespopulation)
+
+  console.log(socialistcountriesmarxistleninisttotalpopulation)
+  console.log(socialdemocraticcountriestotalpopulation)
+  console.log(capitalisttotalpopulation)
+console.log("formersocialistcountriesvaluestimespopulatio",formersocialistcountriesvaluestimespopulation)
+if(formersocialistcountriesvaluestimespopulation){
+  formersocialistcountriesvaluestimespopulation=formersocialistcountriesvaluestimespopulation.reduce((a, b) => a + b)
+}
+console.log("socialistcountriesmarxistleninistvaluestimespopulution",socialistcountriesmarxistleninistvaluestimespopulution)
+if(socialistcountriesmarxistleninistvaluestimespopulution){
+  socialistcountriesmarxistleninistvaluestimespopulution=socialistcountriesmarxistleninistvaluestimespopulution.reduce((a, b) => a + b)
+}
+console.log("socialdemocraticcountriesvaluestimespopulation",socialdemocraticcountriesvaluestimespopulation)
+if(socialdemocraticcountriesvaluestimespopulation){
+  socialdemocraticcountriesvaluestimespopulation=socialdemocraticcountriesvaluestimespopulation.reduce((a, b) => a + b)
+}
+console.log("capitalistvaluestimespopulation",capitalistvaluestimespopulation)
+if(capitalistvaluestimespopulation){
+  capitalistvaluestimespopulation=capitalistvaluestimespopulation.reduce((a, b) => a + b)
+}
+
+  var formersocialistcountriesvaluesaverage=formersocialistcountriesvaluestimespopulation/formersocialistcountriestotalpopulation
+  var socialistcountriesmarxistleninistvaluesaverage=socialistcountriesmarxistleninistvaluestimespopulution/socialistcountriesmarxistleninisttotalpopulation
+  var socialdemocraticcountriesvaluesaverage=socialdemocraticcountriesvaluestimespopulation/socialdemocraticcountriestotalpopulation
+  var capitalistvaluesaverage=capitalistvaluestimespopulation/capitalisttotalpopulation
+
+  console.log(formersocialistcountriesvaluesaverage)
+  console.log(socialistcountriesmarxistleninistvaluesaverage)
+  console.log(socialdemocraticcountriesvaluesaverage)
+  console.log(capitalistvaluesaverage)
+
+
+  var dat=[...socialistcountriesmarxistleninistvalues,...formersocialistcountriesvalues,...socialdemocraticcountriesvalues,...capitalistvalues]
+  var labels=[...socialistcountriesmarxistleninistlabels,...formersocialistcountrieslabels,...socialdemocraticcountrieslabels,...capitalistlabels]
+  for (var x=0;x<dat.length;x++){
+    console.log(dat[x],labels[x])
   }
-       setAveragesData(dataobjecttwo)
-       setGraphSize(dat.length*20)
-        setData(dataobject)
-      }).catch((error) => {
-  console.error('Error:', error);
-});
+
+  var dataobject= {
+      labels: [...labels],
+      datasets: [{
+        label: `${event.target.value}`,
+        data: [...dat],
+        backgroundColor: [],
+        borderWidth: 1
+      }]
+    }
+  for(var x of socialistcountriesmarxistleninistvalues){
+    dataobject.datasets[0].backgroundColor.push("red")
+  }
+  for(var x of socialdemocraticcountriesvalues){
+    dataobject.datasets[0].backgroundColor.push("yellow")
+  }
+  for(var y of capitalistvalues){
+    dataobject.datasets[0].backgroundColor.push("blue")
+  }
+  for(var y of formersocialistcountriesvalues){
+    dataobject.datasets[0].backgroundColor.push("orange")
+  }
+  console.log(dataobject.datasets[0].backgroundColor)
+
+  var dataobjecttwo= {
+    labels: ["Marxist-Leninist","Democratic Socialist","Capitalist","Formerly-Socialist"],
+      datasets: [{
+        label: `Averages`,
+        data: [socialistcountriesmarxistleninistvaluesaverage,
+        socialdemocraticcountriesvaluesaverage,
+        capitalistvaluesaverage,
+      formersocialistcountriesvaluesaverage],
+        backgroundColor: ["red","yellow","blue","orange"],
+        borderWidth: 1
+      }]
+    }
+         setAveragesData(dataobjecttwo)
+         setGraphSize(dat.length*20)
+          setData(dataobject)
+        }).catch((error) => {
+    console.error('Error:', error);
+  });
+  }
 }
 
 
@@ -504,44 +517,153 @@ console.log("displayastatallcountries",displayastatallcountries)
         }}/>
         <label htmlFor='name'>Search for a particular stat for all countries</label>
         <select name="room" id="room" onChange={(e) => handleStatisticChange(e)}>
-          {mappedstatistics}
+        <option value={null}></option>
+          <option style={{color: "red",fontWeight:"strong"}} value={null}>Health</option>
+          <option value={'heart_disease_deaths_per_hundred_thousand'}>
+          heart_disease_deaths_per_hundred_thousand</option>
+          <option value={'drug_related_deaths_per_hundred_thousand'}>
+          drug_related_deaths_per_hundred_thousand</option>
+          <option value={'obesity_percentage'}>
+          obesity_percentage</option>
+          <option value={'life_expectancy'}>
+          life_expectancy</option>
+          <option value={'infant_mortality'}>
+          infant_mortality</option>
+          <option value={'adolescent_birth_rate_per_thousand'}>
+          adolescent_birth_rate_per_thousand</option>
+          <option value={'suicide_rate_male'}>
+          suicide_rate_male</option>
+          <option value={'suicide_rate_female'}>
+          suicide_rate_female</option>
+          <option value={'cancer_deaths_per_hundred_thousand'}>
+          cancer_deaths_per_hundred_thousand</option>
+          <option value={'malnourishment_percentage'}>
+          malnourishment_percentage</option>
+          <option value={'road_traffic_deaths'}>
+          road_traffic_deaths</option>
+          <option value={'diarrhoea_deaths_per_hundred_thousand'}>
+          diarrhoea_deaths_per_hundred_thousand</option>
+          <option value={'diabetes_death_rate_per_hundred_thousand'}>
+          diabetes_death_rate_per_hundred_thousand</option>
+          <option value={'tuberculosis_per_hundred_thousand'}>
+          tuberculosis_per_hundred_thousand</option>
+          <option value={'death_by_injury'}>
+          death_by_injury</option>
+          <option value={'underweight_children_percentage'}>
+          underweight_children_percentage</option>
+          <option value={'hiv_prevalence'}>
+          hiv_prevalence</option>
 
-          <option key={1} style={{color: "red",fontWeight:"strong"}} value={null}>Health</option>
-          'cancer_deaths_per_hundred_thousand', 'heart_disease_deaths_per_hundred_thousand',
-          'drug_related_deaths_per_hundred_thousand','obesity_percentage', 'covid_deaths_per_hundred_thousand',
-          'life_expectancy', 'infant_mortality', 'adolescent_birth_rate_per_thousand',
-          'suicide_rate_male', 'suicide_rate_female', 'malnourishment_percentage', 'road_traffic_deaths',
-           'diarrhoea_deaths_per_hundred_thousand', 'diabetes_death_rate_per_hundred_thousand', 'tuberculosis_per_hundred_thousand',
-            'death_by_injury', 'underweight_children_percentage', 'hiv_prevalence',
+          <option value={null}></option>
           <option key={2} style={{color: "red",fontWeight:"strong"}} value={null}>Environment</option>
-          'natural_resource_depletion','CO2_emissions_metric_tons_per_capita','terrestrial_and_marine_protected_areas_percentage',
-'threatened_fish_species', 'threatened_bird_species','threatened_mammal_species', 'threatened_plant_species',
+          <option value={'natural_resource_depletion'}>
+          natural_resource_depletion</option>
+          <option value={'CO2_emissions_metric_tons_per_capita'}>
+          CO2_emissions_metric_tons_per_capita</option>
+          <option value={'terrestrial_and_marine_protected_areas_percentage'}>
+          terrestrial_and_marine_protected_areas_percentage</option>
+          <option value={'threatened_fish_species'}>
+          threatened_fish_species</option>
+          <option value={'threatened_mammal_species'}>
+          threatened_mammal_species</option>
+          <option value={'threatened_bird_species'}>
+          threatened_bird_species</option>
+          <option value={'threatened_plant_species'}>
+          threatened_plant_species</option>
+
+          <option value={null}></option>
           <option key={3} style={{color: "red",fontWeight:"strong"}} value={null}>Crime</option>
-          'prison_population_per_hundred_thousand', 'intentional_homicide_rate_per_hundred_thousand',
+          <option value={'prison_population_per_hundred_thousand'}>
+          prison_population_per_hundred_thousand</option>
+          <option value={'intentional_homicide_rate_per_hundred_thousand'}>
+          intentional_homicide_rate_per_hundred_thousand</option>
+
+          <option value={null}></option>
           <option key={4} style={{color: "red",fontWeight:"strong"}} value={null}>Economy</option>
-          'union_membership_percentage'
-           'home_ownership_rate', 'homelessness_rate', 'unemployment', 'income_share_highest_20_percent', 'income_share_highest_10_percent',
-            'poverty_gap_at_190cents_a_day', 'income_share_held_by_lowest_10_percent', 'GDP_growth_per_capita_percentage',
-            'vulnerable_employment_women', 'vulnerable_employment_men','gdp_per_capita',  'income_share_lowest_twenty_percent',
-             'cpia_social_equity_policies_average',  'time_required_to_start_business', 'annualized_average_income_growth_rate_per_capita',
-           <option key={4} style={{color: "red",fontWeight:"strong"}} value={null}>Education</option>
-            'gross_enrolement_tertiary_education_ratio','research_and_development_expenditure_percent_of_gpd',
-             'government_expenditure_education_percentage_of_expenditure', 'government_expenditure_education_percentage_of_GDP',
-          <option key={5} style={{color: "red",fontWeight:"strong"}} value={null}>Feminism</option>
-          'percentage_women_in_parliament', 'contraceptive_prevalence_percentage_of_women','time_spent_on_unpaid_domestic_and_care_work_female_percentage',
-           'labour_force_women_percentage', 'firms_with_some_female_ownership',
-          <option key={5} style={{color: "red",fontWeight:"strong"}} value={null}>Technology</option>
-          'medium_and_high_tech_manufacturing_value_added_percentage',
-          'research_and_development_expenditure_percent_of_gpd', 'medium_and_high-tech_manufacturing_value_added_percentage'
-           'high_technology_exports', 'rail_lines_total_km'
-          <option key={5} style={{color: "red",fontWeight:"strong"}} value={null}>Energy</option>
-          'renewable_energy_percentage', 'fossil_fuel_consumption_percentage_of_total_energy_consumption'
-          'renewable_electricity_output_percentage', 'electricity_production_from_hydroelectric_percentage_total', 'renewable_energy_consumption_percentage',
+          <option value={'union_membership_percentage'}>
+          union_membership_percentage</option>
+          <option value={'home_ownership_rate'}>
+          home_ownership_rate</option>
+          <option value={'homelessness_rate'}>
+          homelessness_rate</option>
+          <option value={'unemployment'}>
+          unemployment</option>
+          <option value={'income_share_highest_20_percent'}>
+          income_share_highest_20_percent</option>
+          <option value={'income_share_highest_10_percent'}>
+          income_share_highest_10_percent</option>
+          <option value={'poverty_gap_at_190cents_a_day'}>
+          poverty_gap_at_190cents_a_day</option>
+          <option value={'income_share_held_by_lowest_10_percent'}>
+          income_share_held_by_lowest_10_percent</option>
+          <option value={'GDP_growth_per_capita_percentage'}>
+          GDP_growth_per_capita_percentage</option>
+          <option value={'vulnerable_employment_men'}>
+          vulnerable_employment_men</option>
+          <option value={'vulnerable_employment_women'}>
+          vulnerable_employment_women</option>
+          <option value={'gdp_per_capita'}>
+          gdp_per_capita</option>
+          <option value={'income_share_lowest_twenty_percent'}>
+          income_share_lowest_twenty_percent</option>
+          <option value={'time_required_to_start_business'}>
+          time_required_to_start_business</option>
+          <option value={'annualized_average_income_growth_rate_per_capita'}>
+          annualized_average_income_growth_rate_per_capita</option>
 
-          <option key={5} style={{color: "red",fontWeight:"strong"}} value={null}>Other</option>
-'refugee_population'
+          <option value={null}></option>
+           <option key={5} style={{color: "red",fontWeight:"strong"}} value={null}>Education</option>
+           <option value={'gross_enrolement_tertiary_education_ratio'}>
+           gross_enrolement_tertiary_education_ratio</option>
+           <option value={'research_and_development_expenditure_percent_of_gpd'}>
+           research_and_development_expenditure_percent_of_gpd</option>
+           <option value={'government_expenditure_education_percentage_of_expenditure'}>
+           government_expenditure_education_percentage_of_expenditure</option>
+
+
+           <option value={null}></option>
+          <option key={6} style={{color: "red",fontWeight:"strong"}} value={null}>Feminism</option>
+          <option value={'percentage_women_in_parliament'}>
+          percentage_women_in_parliament</option>
+          <option value={'contraceptive_prevalence_percentage_of_women'}>
+          contraceptive_prevalence_percentage_of_women</option>
+          <option value={'time_spent_on_unpaid_domestic_and_care_work_female_percentage'}>
+          time_spent_on_unpaid_domestic_and_care_work_female_percentage</option>
+          <option value={'labour_force_women_percentage'}>
+          labour_force_women_percentage</option>
+          <option value={'firms_with_some_female_ownership'}>
+          firms_with_some_female_ownership</option>
+
+          <option value={null}></option>
+          <option key={7} style={{color: "red",fontWeight:"strong"}} value={null}>Technology</option>
+          <option value={'medium_and_high_tech_manufacturing_value_added_percentage'}>
+          medium_and_high_tech_manufacturing_value_added_percentage</option>
+          <option value={'research_and_development_expenditure_percent_of_gpd'}>
+          research_and_development_expenditure_percent_of_gpd</option>
+          <option value={'rail_lines_total_km'}>
+          rail_lines_total_km</option>
+
+
+          <option value={null}></option>
+          <option key={8} style={{color: "red",fontWeight:"strong"}} value={null}>Energy</option>
+          <option value={'renewable_energy_percentage'}>
+          renewable_energy_percentage</option>
+          <option value={'fossil_fuel_consumption_percentage_of_total_energy_consumption'}>
+          fossil_fuel_consumption_percentage_of_total_energy_consumption</option>
+          <option value={'renewable_electricity_output_percentage'}>
+          renewable_electricity_output_percentage</option>
+          <option value={'electricity_production_from_hydroelectric_percentage_total'}>
+          electricity_production_from_hydroelectric_percentage_total</option>
+          <option value={'renewable_energy_consumption_percentage'}>
+          renewable_energy_consumption_percentage</option>
+
+
+          <option value={null}></option>
+          <option key={9} style={{color: "red",fontWeight:"strong"}} value={null}>Other</option>
+          <option value={'refugee_population'}>
+          refugee_population</option>
+              <option value={null}></option>
         </select>
-
     </section>
     </div>
     <p className="explanation">Data from the World Bank, World Health Organization and United Nations Developement Programme
