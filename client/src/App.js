@@ -317,19 +317,22 @@ async function handleStatisticChange(event) {
   console.log(socialdemocraticcountriestotalpopulation)
   console.log(capitalisttotalpopulation)
 console.log("formersocialistcountriesvaluestimespopulatio",formersocialistcountriesvaluestimespopulation)
-if(formersocialistcountriesvaluestimespopulation){
+if(formersocialistcountriesvaluestimespopulation.length>0){
   formersocialistcountriesvaluestimespopulation=formersocialistcountriesvaluestimespopulation.reduce((a, b) => a + b)
 }
 console.log("socialistcountriesmarxistleninistvaluestimespopulution",socialistcountriesmarxistleninistvaluestimespopulution)
-if(socialistcountriesmarxistleninistvaluestimespopulution){
+if(socialistcountriesmarxistleninistvaluestimespopulution.length>0){
   socialistcountriesmarxistleninistvaluestimespopulution=socialistcountriesmarxistleninistvaluestimespopulution.reduce((a, b) => a + b)
 }
 console.log("socialdemocraticcountriesvaluestimespopulation",socialdemocraticcountriesvaluestimespopulation)
-if(socialdemocraticcountriesvaluestimespopulation){
-  socialdemocraticcountriesvaluestimespopulation=socialdemocraticcountriesvaluestimespopulation.reduce((a, b) => a + b)
+if(socialdemocraticcountriesvaluestimespopulation.length>0){
+  socialdemocraticcountriesvaluestimespopulation=socialdemocraticcountriesvaluestimespopulation.reduce((a, b
+
+
+  ) => a + b)
 }
 console.log("capitalistvaluestimespopulation",capitalistvaluestimespopulation)
-if(capitalistvaluestimespopulation){
+if(capitalistvaluestimespopulation.length>0){
   capitalistvaluestimespopulation=capitalistvaluestimespopulation.reduce((a, b) => a + b)
 }
 
@@ -359,18 +362,19 @@ if(capitalistvaluestimespopulation){
         borderWidth: 1
       }]
     }
-  for(var x of socialistcountriesmarxistleninistvalues){
+  for(let x of socialistcountriesmarxistleninistvalues){
     dataobject.datasets[0].backgroundColor.push("red")
   }
-  for(var x of socialdemocraticcountriesvalues){
-    dataobject.datasets[0].backgroundColor.push("yellow")
-  }
-  for(var y of capitalistvalues){
-    dataobject.datasets[0].backgroundColor.push("blue")
-  }
-  for(var y of formersocialistcountriesvalues){
+  for(let y of formersocialistcountriesvalues){
     dataobject.datasets[0].backgroundColor.push("orange")
   }
+  for(let x of socialdemocraticcountriesvalues){
+    dataobject.datasets[0].backgroundColor.push("yellow")
+  }
+  for(let y of capitalistvalues){
+    dataobject.datasets[0].backgroundColor.push("blue")
+  }
+
   console.log(dataobject.datasets[0].backgroundColor)
 
   var dataobjecttwo= {
@@ -549,10 +553,11 @@ console.log("displayastatallcountries",displayastatallcountries)
           tuberculosis_per_hundred_thousand</option>
           <option value={'death_by_injury'}>
           death_by_injury</option>
-          <option value={'underweight_children_percentage'}>
-          underweight_children_percentage</option>
           <option value={'hiv_prevalence'}>
           hiv_prevalence</option>
+          <option value={'hospital_beds_per_thousand'}>
+          hospital_beds_per_thousand</option>
+
 
           <option value={null}></option>
           <option key={2} style={{color: "red",fontWeight:"strong"}} value={null}>Environment</option>
@@ -610,6 +615,9 @@ console.log("displayastatallcountries",displayastatallcountries)
           time_required_to_start_business</option>
           <option value={'annualized_average_income_growth_rate_per_capita'}>
           annualized_average_income_growth_rate_per_capita</option>
+          <option value={'population_living_in_slums_percentage_urban_population'}>
+          population_living_in_slums_percentage_urban_population</option>
+
 
           <option value={null}></option>
            <option key={5} style={{color: "red",fontWeight:"strong"}} value={null}>Education</option>

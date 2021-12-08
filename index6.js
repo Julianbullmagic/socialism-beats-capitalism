@@ -298,10 +298,15 @@ if (process.env.CLEARDB_DATABASE_URL) {
 //
 //     var countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
 //     console.log(countries)
-//     var rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+//     var rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
 //     rate.shift();
 //     // console.log(countries)
 //     console.log(rate)
+// rate=rate.filter(function(el, index) {
+//    return index % 2 === 1;
+//  });
+//  rate=rate.slice(0,countries.length)
+//  console.log(rate)
 //     rate=rate.slice(0,countries.length)
 //     console.log(countries.length,rate.length)
 //
@@ -325,10 +330,15 @@ if (process.env.CLEARDB_DATABASE_URL) {
 //
 //     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
 //     console.log(countries)
-//     rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+//     rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
 //     rate.shift();
 //     // console.log(countries)
 //     console.log(rate)
+// rate=rate.filter(function(el, index) {
+//    return index % 2 === 1;
+//  });
+//  rate=rate.slice(0,countries.length)
+//  console.log(rate)
 //     rate=rate.slice(0,countries.length)
 //     console.log(countries.length,rate.length)
 //     for (let x=0;x<countries.length;x++){
@@ -351,10 +361,15 @@ if (process.env.CLEARDB_DATABASE_URL) {
 //     await page.goto('https://data.worldbank.org/indicator/EG.FEC.RNEW.ZS?view=chart');
 //     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
 //     console.log(countries)
-//     rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+//     rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
 //     rate.shift();
 //     // console.log(countries)
 //     console.log(rate)
+// rate=rate.filter(function(el, index) {
+//    return index % 2 === 1;
+//  });
+//  rate=rate.slice(0,countries.length)
+//  console.log(rate)
 //     rate=rate.slice(0,countries.length)
 //     console.log(countries.length,rate.length)
 //     for (let x=0;x<countries.length;x++){
@@ -382,10 +397,15 @@ if (process.env.CLEARDB_DATABASE_URL) {
 //
 //     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
 //     console.log(countries)
-//     rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+//     rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
 //     rate.shift();
 //     // console.log(countries)
 //     console.log(rate)
+// rate=rate.filter(function(el, index) {
+//    return index % 2 === 1;
+//  });
+//  rate=rate.slice(0,countries.length)
+//  console.log(rate)
 //     rate=rate.slice(0,countries.length)
 //     console.log(countries.length,rate.length)
 //
@@ -411,10 +431,15 @@ if (process.env.CLEARDB_DATABASE_URL) {
 //
 //     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
 //     console.log(countries)
-//     rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+//     rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
 //     rate.shift();
 //     // console.log(countries)
 //     console.log(rate)
+// rate=rate.filter(function(el, index) {
+//    return index % 2 === 1;
+//  });
+//  rate=rate.slice(0,countries.length)
+//  console.log(rate)
 //     rate=rate.slice(0,countries.length)
 //     console.log(countries.length,rate.length)
 //     for (let x=0;x<countries.length;x++){
@@ -438,10 +463,15 @@ if (process.env.CLEARDB_DATABASE_URL) {
 //
 //     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
 //     console.log(countries)
-//     rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+//     rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
 //     rate.shift();
 //     // console.log(countries)
 //     console.log(rate)
+// rate=rate.filter(function(el, index) {
+//    return index % 2 === 1;
+//  });
+//  rate=rate.slice(0,countries.length)
+//  console.log(rate)
 //     rate=rate.slice(0,countries.length)
 //     console.log(countries.length,rate.length)
 //     for (let x=0;x<countries.length;x++){
@@ -464,10 +494,15 @@ if (process.env.CLEARDB_DATABASE_URL) {
 //
 //     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
 //     console.log(countries)
-//     rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+//     rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
 //     rate.shift();
 //     // console.log(countries)
 //     console.log(rate)
+// rate=rate.filter(function(el, index) {
+//    return index % 2 === 1;
+//  });
+//  rate=rate.slice(0,countries.length)
+//  console.log(rate)
 //     rate=rate.slice(0,countries.length)
 //     console.log(countries.length,rate.length)
 //     for (let x=0;x<countries.length;x++){
@@ -493,10 +528,15 @@ if (process.env.CLEARDB_DATABASE_URL) {
 //
 //     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
 //     console.log(countries)
-//     rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+//     rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
 //     rate.shift();
 //     // console.log(countries)
 //     console.log(rate)
+// rate=rate.filter(function(el, index) {
+//    return index % 2 === 1;
+//  });
+//  rate=rate.slice(0,countries.length)
+//  console.log(rate)
 //     rate=rate.slice(0,countries.length)
 //     console.log(countries.length,rate.length)
 //     for (let x=0;x<countries.length;x++){
@@ -512,7 +552,7 @@ if (process.env.CLEARDB_DATABASE_URL) {
 //       )
 //     }
 //   }
-// 
+//
 //
 //
 //
@@ -522,10 +562,15 @@ if (process.env.CLEARDB_DATABASE_URL) {
 //
 //     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
 //     console.log(countries)
-//     rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+//     rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
 //     rate.shift();
 //     // console.log(countries)
 //     console.log(rate)
+// rate=rate.filter(function(el, index) {
+//    return index % 2 === 1;
+//  });
+//  rate=rate.slice(0,countries.length)
+//  console.log(rate)
 //     rate=rate.slice(0,countries.length)
 //     console.log(countries.length,rate.length)
 //     for (let x=0;x<countries.length;x++){
@@ -550,10 +595,15 @@ if (process.env.CLEARDB_DATABASE_URL) {
 //
 //     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
 //     console.log(countries)
-//     rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+//     rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
 //     rate.shift();
 //     // console.log(countries)
 //     console.log(rate)
+// rate=rate.filter(function(el, index) {
+//    return index % 2 === 1;
+//  });
+//  rate=rate.slice(0,countries.length)
+//  console.log(rate)
 //     rate=rate.slice(0,countries.length)
 //     console.log(countries.length,rate.length)
 //     for (let x=0;x<countries.length;x++){
@@ -576,10 +626,15 @@ if (process.env.CLEARDB_DATABASE_URL) {
 //
 //     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
 //     console.log(countries)
-//     rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+//     rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
 //     rate.shift();
 //     // console.log(countries)
 //     console.log(rate)
+// rate=rate.filter(function(el, index) {
+//    return index % 2 === 1;
+//  });
+//  rate=rate.slice(0,countries.length)
+//  console.log(rate)
 //     rate=rate.slice(0,countries.length)
 //     console.log(countries.length,rate.length)
 //     for (let x=0;x<countries.length;x++){
@@ -602,10 +657,15 @@ if (process.env.CLEARDB_DATABASE_URL) {
 //
 //     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
 //     console.log(countries)
-//     rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+//     rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
 //     rate.shift();
 //     // console.log(countries)
 //     console.log(rate)
+// rate=rate.filter(function(el, index) {
+//    return index % 2 === 1;
+//  });
+//  rate=rate.slice(0,countries.length)
+//  console.log(rate)
 //     rate=rate.slice(0,countries.length)
 //     console.log(countries.length,rate.length)
 //     for (let x=0;x<countries.length;x++){
@@ -628,10 +688,15 @@ if (process.env.CLEARDB_DATABASE_URL) {
 
     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
     console.log(countries)
-    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
     rate.shift();
     // console.log(countries)
     console.log(rate)
+    rate=rate.filter(function(el, index) {
+       return index % 2 === 1;
+     });
+     rate=rate.slice(0,countries.length)
+     console.log(rate)
     rate=rate.slice(0,countries.length)
     console.log(countries.length,rate.length)
     for (let x=0;x<countries.length;x++){
@@ -659,10 +724,15 @@ if (process.env.CLEARDB_DATABASE_URL) {
 
     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
     console.log(countries)
-    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
     rate.shift();
     // console.log(countries)
     console.log(rate)
+    rate=rate.filter(function(el, index) {
+       return index % 2 === 1;
+     });
+     rate=rate.slice(0,countries.length)
+     console.log(rate)
     rate=rate.slice(0,countries.length)
     console.log(countries.length,rate.length)
     for (let x=0;x<countries.length;x++){
@@ -691,10 +761,15 @@ if (process.env.CLEARDB_DATABASE_URL) {
 
     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
     console.log(countries)
-    rate = await page.$$eval('div.item div:nth-child(3)', links => { return links.map(link => link.textContent)})
+    rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
     rate.shift();
     // console.log(countries)
     console.log(rate)
+     rate=rate.filter(function(el, index) {
+        return index % 2 === 1;
+      });
+      rate=rate.slice(0,countries.length)
+      console.log(rate)
     rate=rate.slice(0,countries.length)
     console.log(countries.length,rate.length)
     for (let x=0;x<countries.length;x++){

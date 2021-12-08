@@ -294,6 +294,10 @@ const countryList = [
 
 
 
+var prisonpopulationperhundredthousand=await fetchUNDATA(128306)
+
+console.log("prisonpopulationperhundredthousand",Object.keys(prisonpopulationperhundredthousand).length)
+
 var adolescentbirthrateperthousand=await fetchUNDATA(36806)
 
 console.log("adolescentbirthrateperthousand",Object.keys(adolescentbirthrateperthousand).length)
@@ -362,6 +366,11 @@ console.log(countriesObject)
 for (var country in countriesObject){
   var count=country.toLowerCase()
 
+  for (let x in prisonpopulationperhundredthousand){
+    if(x.toLowerCase()==count){
+      countriesObject[`${count}`][`prisonpopulationperhundredthousand`]=prisonpopulationperhundredthousand[`${x}`]
+    }
+  }
 
   for (let x in adolescentbirthrateperthousand){
     if(x.toLowerCase()==count){
@@ -445,6 +454,7 @@ for (var x in countriesObject){
     await db.query(
        `UPDATE countries
         SET population=${countriesObject[`${x}`][`population`]||null},
+         prison_population_per_hundred_thousand=${countriesObject[`${x}`][`prisonpopulationperhundredthousand`]||null},
          adolescent_birth_rate_per_thousand=${countriesObject[`${x}`][`adolescentbirthrateperthousand`]||null},
          human_inequality_coefficient=${countriesObject[`${x}`][`humaninequalitycoefficient`]||null},
          fossil_fuel_consumption_percentage_of_total_energy_consumption=${countriesObject[`${x}`][`fossilfuelconsumptionpercentageoftotalenergyconsumption`]||null},
