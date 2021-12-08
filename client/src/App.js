@@ -692,11 +692,33 @@ console.log("displayastatallcountries",displayastatallcountries)
     </>
   )}
 
-let st=['renewable_energy_percentage', 'fossil_fuel_consumption_percentage_of_total_energy_consumption', 'cancer_deaths_per_hundred_thousand', 'heart_disease_deaths_per_hundred_thousand', 'drug_related_deaths_per_hundred_thousand', 'home_ownership_rate', 'homelessness_rate', 'obesity_percentage', 'covid_deaths_per_hundred_thousand', 'unemployment', 'life_expectancy', 'infant_mortality', 'adolescent_birth_rate_per_thousand', 'gross_enrolement_tertiary_education_ratio', 'natural_resource_depletion', 'prison_population_per_hundred_thousand', 'intentional_homicide_rate_per_hundred_thousand', 'research_and_development_expenditure_percent_of_gpd', 'percentage_women_in_parliament', 'suicide_rate_male', 'suicide_rate_female', 'renewable_electricity_output_percentage', 'electricity_production_from_hydroelectric_percentage_total', 'renewable_energy_consumption_percentage', 'CO2_emissions_metric_tons_per_capita', 'government_expenditure_education_percentage_of_expenditure', 'terrestrial_and_marine_protected_areas_percentage', 'contraceptive_prevalence_percentage_of_women', 'time_spent_on_unpaid_domestic_and_care_work_female_percentage', 'income_share_highest_20_percent', 'income_share_highest_10_percent', 'poverty_gap_at_190cents_a_day', 'income_share_held_by_lowest_10_percent', 'GDP_growth_per_capita_percentage', 'malnourishment_percentage', 'road_traffic_deaths', 'diarrhoea_deaths_per_hundred_thousand', 'diabetes_death_rate_per_hundred_thousand', 'tuberculosis_per_hundred_thousand', 'death_by_injury', 'vulnerable_employment_women', 'vulnerable_employment_men', 'labour_force_women_percentage', 'threatened_fish_species', 'threatened_bird_species', 'firms_with_some_female_ownership', 'threatened_mammal_species', 'medium_and_high-tech_manufacturing_value_added_percentage', 'gdp_per_capita', 'hiv_prevalence', 'income_share_lowest_twenty_percent', 'time_required_to_start_business', 'annualized_average_income_growth_rate_per_capita', 'rail_lines_total_km', 'refugee_population', 'threatened_plant_species', 'medium_and_high_tech_manufacturing_value_added_percentage', 'union_membership_percentage', 'population_living_in_slums_percentage_urban_population', 'hospital_beds_per_thousand']
 
-var percentages=["home_ownership_rate",
+var percentages=[
+  'time_required_to_start_business',
+  'income_share_highest_20_percent',
+  'income_share_lowest_twenty_percent',
+  'medium_and_high-tech_manufacturing_value_added_percentage',
+  'firms_with_some_female_ownership',
+  'vulnerable_employment_women',
+  'vulnerable_employment_men',
+  'labour_force_women_percentage',
+  'income_share_highest_10_percent',
+  'poverty_gap_at_190cents_a_day',
+  'income_share_held_by_lowest_10_percent',
+  'contraceptive_prevalence_percentage_of_women',
+  'time_spent_on_unpaid_domestic_and_care_work_female_percentage',
+  'GDP_growth_per_capita_percentage',
+  'malnourishment_percentage',
+  'terrestrial_and_marine_protected_areas_percentage',
+  'government_expenditure_education_percentage_of_expenditure',
+'medium_and_high_tech_manufacturing_value_added_percentage',
+'union_membership_percentage',
+"home_ownership_rate",
+'annualized_average_income_growth_rate_per_capita',
 "obesity_percentage",
 "unemployment",
+'electricity_production_from_hydroelectric_percentage_total',
+'renewable_energy_consumption_percentage',
 "health_expenditure_percentage_gdp",
 "research_and_development_expenditure_percent_of_gpd",
 "percentage_women_in_parliament",
@@ -713,7 +735,8 @@ var percentages=["home_ownership_rate",
 `government_expenditure_education_percentage_of_GDP`,
 `terrestrial_and_marine_protected_areas_percentage`,
 `contraceptive_prevalence_percentage_of_women`,
-`time_spent_on_unpaid_domestic_and_care_work_female_percentage`
+`time_spent_on_unpaid_domestic_and_care_work_female_percentage`,
+'population_living_in_slums_percentage_urban_population'
 ]
 
 
@@ -722,6 +745,19 @@ var perthousand=["adolescent_birth_rate_per_thousand",
 
 
 var otherstatistics=[
+  'hiv_prevalence',
+  'threatened_fish_species',
+  'threatened_bird_species',
+  'threatened_mammal_species',
+  'road_traffic_deaths',
+  'diarrhoea_deaths_per_hundred_thousand',
+  'diabetes_death_rate_per_hundred_thousand',
+  'tuberculosis_per_hundred_thousand',
+  'death_by_injury',
+  'threatened_plant_species',
+  'CO2_emissions_metric_tons_per_capita',
+  'refugee_population',
+  'drug_related_deaths_per_hundred_thousand',
   "homelessness_rate",
   `CO2_emissions_metric_tons_per_capita`,
   "intentional_homicide_rate_per_hundred_thousand",
@@ -733,12 +769,15 @@ var otherstatistics=[
   "post_secondary_enrollment_female",
   "post_secondary_enrollment_male",
   "infant_mortality",
+  'rail_lines_total_km',
   "threatened_species",
   "adolescent_birth_rate_per_thousand",
   "human_inequality_coefficient",
   "gender_inequality_index",
   "gross_enrolement_tertiary_education_ratio",
   "homicide_rate_per_hundred_thousand",
+  'cancer_deaths_per_hundred_thousand',
+  'heart_disease_deaths_per_hundred_thousand',
   "mean_years_of_schooling",
   "natural_resource_depletion",
   "safe_sanitation_services",

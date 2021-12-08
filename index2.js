@@ -454,7 +454,6 @@ for (var x in countriesObject){
     await db.query(
        `UPDATE countries
         SET population=${countriesObject[`${x}`][`population`]||null},
-         prison_population_per_hundred_thousand=${countriesObject[`${x}`][`prisonpopulationperhundredthousand`]||null},
          adolescent_birth_rate_per_thousand=${countriesObject[`${x}`][`adolescentbirthrateperthousand`]||null},
          fossil_fuel_consumption_percentage_of_total_energy_consumption=${countriesObject[`${x}`][`fossilfuelconsumptionpercentageoftotalenergyconsumption`]||null},
          gross_enrolement_tertiary_education_ratio=${countriesObject[`${x}`][`grossenrolementtertiaryeducationratio`]||null},

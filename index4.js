@@ -437,8 +437,7 @@ db.query(
     covid_deaths_per_hundred_thousand=${covid||null},
     life_expectancy=${expectancy||null},
     unemployment=${unemployment||null},
-    infant_mortality=${infant*100||null},
-    co2_emissions=${co2||null}
+    infant_mortality=${infant*100||null}
     WHERE name = '${count}';`
 )
 console.log("inserted into database")
