@@ -5,7 +5,7 @@ import { Bar } from 'react-chartjs-2';
 import * as zoom from 'chartjs-plugin-zoom'
 import Hammer from "hammerjs";
 let baseurl='http://localhost:5000/'
-if(process.env.NODE_ENV="production"){
+if(process.env.NODE_ENV=="production"){
   baseurl="/"
 }
 
@@ -44,7 +44,7 @@ const { height, width } = useWindowDimensions()
 
 
 useEffect(()=>{
-  fetch(baseurl+'/getalldata')
+  fetch(baseurl+'getalldata')
   .then(result=>result.json())
   .then(data=>{
     var datacopy=JSON.parse(JSON.stringify(data))
@@ -61,7 +61,7 @@ console.log("statLabels",filtereddatacopy)
    setStatLabels(filtereddatacopythree)
  }).catch(err=>console.log(err))
 
-  fetch(baseurl+'/getallcountries')
+  fetch(baseurl+'getallcountries')
   .then(result=>result.json())
   .then(data=>{
 console.log(data)
@@ -124,7 +124,7 @@ async function handleSubmitCountry(e) {
 
     console.log(secondCountrySearchTerm.current.value)
 
-    var datacopy=await fetch(baseurl+"/searchcountries/"+secondCountrySearchTerm.current.value)
+    var datacopy=await fetch(baseurl+"searchcountries/"+secondCountrySearchTerm.current.value)
     .then(result=>result.json())
     .then(data=>{
       console.log(data[0])
@@ -140,7 +140,7 @@ return datacopy
     }).catch((error) => {
   console.error('Error:', error);
 });
-        await fetch(baseurl+"/searchcountries/"+searchValue.current.value)
+        await fetch(baseurl+"searchcountries/"+searchValue.current.value)
         .then(result=>result.json())
         .then(data=>{
           console.log(data[0])
@@ -692,7 +692,7 @@ console.log("displayastatallcountries",displayastatallcountries)
     </>
   )}
 
-let s=['renewable_energy_percentage', 'fossil_fuel_consumption_percentage_of_total_energy_consumption', 'cancer_deaths_per_hundred_thousand', 'heart_disease_deaths_per_hundred_thousand', 'drug_related_deaths_per_hundred_thousand', 'home_ownership_rate', 'homelessness_rate', 'obesity_percentage', 'covid_deaths_per_hundred_thousand', 'unemployment', 'life_expectancy', 'infant_mortality', 'adolescent_birth_rate_per_thousand', 'gross_enrolement_tertiary_education_ratio', 'natural_resource_depletion', 'prison_population_per_hundred_thousand', 'intentional_homicide_rate_per_hundred_thousand', 'research_and_development_expenditure_percent_of_gpd', 'percentage_women_in_parliament', 'suicide_rate_male', 'suicide_rate_female', 'renewable_electricity_output_percentage', 'electricity_production_from_hydroelectric_percentage_total', 'renewable_energy_consumption_percentage', 'CO2_emissions_metric_tons_per_capita', 'government_expenditure_education_percentage_of_expenditure', 'terrestrial_and_marine_protected_areas_percentage', 'contraceptive_prevalence_percentage_of_women', 'time_spent_on_unpaid_domestic_and_care_work_female_percentage', 'income_share_highest_20_percent', 'income_share_highest_10_percent', 'poverty_gap_at_190cents_a_day', 'income_share_held_by_lowest_10_percent', 'GDP_growth_per_capita_percentage', 'malnourishment_percentage', 'road_traffic_deaths', 'diarrhoea_deaths_per_hundred_thousand', 'diabetes_death_rate_per_hundred_thousand', 'tuberculosis_per_hundred_thousand', 'death_by_injury', 'vulnerable_employment_women', 'vulnerable_employment_men', 'labour_force_women_percentage', 'threatened_fish_species', 'threatened_bird_species', 'firms_with_some_female_ownership', 'threatened_mammal_species', 'medium_and_high-tech_manufacturing_value_added_percentage', 'gdp_per_capita', 'hiv_prevalence', 'income_share_lowest_twenty_percent', 'time_required_to_start_business', 'annualized_average_income_growth_rate_per_capita', 'rail_lines_total_km', 'refugee_population', 'threatened_plant_species', 'medium_and_high_tech_manufacturing_value_added_percentage', 'union_membership_percentage', 'population_living_in_slums_percentage_urban_population', 'hospital_beds_per_thousand']
+let st=['renewable_energy_percentage', 'fossil_fuel_consumption_percentage_of_total_energy_consumption', 'cancer_deaths_per_hundred_thousand', 'heart_disease_deaths_per_hundred_thousand', 'drug_related_deaths_per_hundred_thousand', 'home_ownership_rate', 'homelessness_rate', 'obesity_percentage', 'covid_deaths_per_hundred_thousand', 'unemployment', 'life_expectancy', 'infant_mortality', 'adolescent_birth_rate_per_thousand', 'gross_enrolement_tertiary_education_ratio', 'natural_resource_depletion', 'prison_population_per_hundred_thousand', 'intentional_homicide_rate_per_hundred_thousand', 'research_and_development_expenditure_percent_of_gpd', 'percentage_women_in_parliament', 'suicide_rate_male', 'suicide_rate_female', 'renewable_electricity_output_percentage', 'electricity_production_from_hydroelectric_percentage_total', 'renewable_energy_consumption_percentage', 'CO2_emissions_metric_tons_per_capita', 'government_expenditure_education_percentage_of_expenditure', 'terrestrial_and_marine_protected_areas_percentage', 'contraceptive_prevalence_percentage_of_women', 'time_spent_on_unpaid_domestic_and_care_work_female_percentage', 'income_share_highest_20_percent', 'income_share_highest_10_percent', 'poverty_gap_at_190cents_a_day', 'income_share_held_by_lowest_10_percent', 'GDP_growth_per_capita_percentage', 'malnourishment_percentage', 'road_traffic_deaths', 'diarrhoea_deaths_per_hundred_thousand', 'diabetes_death_rate_per_hundred_thousand', 'tuberculosis_per_hundred_thousand', 'death_by_injury', 'vulnerable_employment_women', 'vulnerable_employment_men', 'labour_force_women_percentage', 'threatened_fish_species', 'threatened_bird_species', 'firms_with_some_female_ownership', 'threatened_mammal_species', 'medium_and_high-tech_manufacturing_value_added_percentage', 'gdp_per_capita', 'hiv_prevalence', 'income_share_lowest_twenty_percent', 'time_required_to_start_business', 'annualized_average_income_growth_rate_per_capita', 'rail_lines_total_km', 'refugee_population', 'threatened_plant_species', 'medium_and_high_tech_manufacturing_value_added_percentage', 'union_membership_percentage', 'population_living_in_slums_percentage_urban_population', 'hospital_beds_per_thousand']
 
 var percentages=["home_ownership_rate",
 "obesity_percentage",
