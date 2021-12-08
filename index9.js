@@ -281,107 +281,135 @@ if (process.env.CLEARDB_DATABASE_URL) {
     const browser = await puppeteer.launch({ headless: false });;
     const page = await browser.newPage();
 
-// 
-//     // Union membership percentage
-//         await page.goto('https://en.wikipedia.org/wiki/Trade_union');
-//         await page.waitForTimeout(10000)
 //
-//         countries = await page.$$eval('table.wikitable tr td:first-of-type', links => { return links.map(link => link.textContent)})
-//         console.log(countries)
-//         rate = await page.$$eval('table.wikitable tr td:nth-child(3)', links => { return links.map(link => link.textContent)})
-//         console.log(rate)
+    // Union membership percentage
+        await page.goto('https://en.wikipedia.org/wiki/Trade_union');
+        await page.waitForTimeout(10000)
+
+        countries = await page.$$eval('table.wikitable tr td:first-of-type', links => { return links.map(link => link.textContent)})
+        console.log(countries)
+        rate = await page.$$eval('table.wikitable tr td:nth-child(3)', links => { return links.map(link => link.textContent)})
+        console.log(rate)
+
+        rate=rate.map(item=>parseFloat(item.replace("/n","")))
+
+        console.log(countries.length,rate.length)
+        console.log(countries)
+        console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+        rate=rate.slice(0,countries.length)
+        console.log(countries.length,rate.length)
+        for (let x=0;x<countries.length;x++){
+          console.log("DATA",countries[x],rate[x])
+          let count=countries[x].replace(/'/g,' ')
+            if(rate[x]){
+    let r=rate[x]
+    r=parseFloat(r)
+          await db.query(
+             `UPDATE countries
+              SET union_membership_percentage = ${r}
+              WHERE name = '${count.toLowerCase()}';`
+          )
+        }
+      }
+
+
+
+
+// GDP growth per capita %
+    await page.goto('https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?view=chart');
+    await page.waitForTimeout(10000)
+
+    countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+    console.log(countries)
+    rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+    rate.shift();
+    // console.log(countries)
+    console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+    rate=rate.slice(0,countries.length)
+    console.log(countries.length,rate.length)
+    for (let x=0;x<countries.length;x++){
+      console.log("DATA",countries[x],rate[x])
+      let count=countries[x].replace(/'/g,' ')
+        if(rate[x]){
+let r=rate[x].replace(',','')
+r=parseFloat(r)
+      await db.query(
+         `UPDATE countries
+          SET GDP_growth_per_capita_percentage = ${r}
+          WHERE name = '${count.toLowerCase()}';`
+      )
+    }
+  }
 //
-//         rate=rate.map(item=>parseFloat(item.replace("/n","")))
+//   await page.goto('https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?view=chart');
+//   await page.waitForTimeout(10000)
 //
-//         console.log(countries.length,rate.length)
-//         console.log(countries)
-//         console.log(rate)
-//  rate=rate.filter(function(el, index) {
+//   countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+//   console.log(countries)
+//   rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+//   rate.shift();
+//   // console.log(countries)
+//   rate=rate.filter(function(el, index) {
 //     return index % 2 === 1;
 //   });
 //   rate=rate.slice(0,countries.length)
 //   console.log(rate)
-//         rate=rate.slice(0,countries.length)
-//         console.log(countries.length,rate.length)
-//         for (let x=0;x<countries.length;x++){
-//           console.log("DATA",countries[x],rate[x])
-//           let count=countries[x].replace(/'/g,' ')
-//             if(rate[x]){
-//     let r=rate[x]
-//     r=parseFloat(r)
-//           await db.query(
-//              `UPDATE countries
-//               SET union_membership_percentage = ${r}
-//               WHERE name = '${count.toLowerCase()}';`
-//           )
-//         }
-//       }
 //
-//
-//
-//
-// // GDP growth per capita %
-//     await page.goto('https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?view=chart');
-//     await page.waitForTimeout(10000)
-//
-//     countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
-//     console.log(countries)
-//     rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-//     rate.shift();
-//     // console.log(countries)
-//     console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
-//     rate=rate.slice(0,countries.length)
-//     console.log(countries.length,rate.length)
-//     for (let x=0;x<countries.length;x++){
-//       console.log("DATA",countries[x],rate[x])
-//       let count=countries[x].replace(/'/g,' ')
-//         if(rate[x]){
+//   console.log(countries.length,rate.length)
+//   for (let x=0;x<countries.length;x++){
+//     console.log("DATA",countries[x],rate[x])
+//     let count=countries[x].replace(/'/g,' ')
+//       if(rate[x]){
 // let r=rate[x].replace(',','')
 // r=parseFloat(r)
-//       await db.query(
-//          `UPDATE countries
-//           SET GDP_growth_per_capita_percentage = ${r}
-//           WHERE name = '${count.toLowerCase()}';`
-//       )
-//     }
+//     await db.query(
+//        `UPDATE countries
+//         SET malnourishment_percentage = ${r}
+//         WHERE name = '${count.toLowerCase()}';`
+//     )
 //   }
-// //
-// //   await page.goto('https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?view=chart');
-// //   await page.waitForTimeout(10000)
-// //
-// //   countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
-// //   console.log(countries)
-// //   rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// //   rate.shift();
-// //   // console.log(countries)
-// //   rate=rate.filter(function(el, index) {
-// //     return index % 2 === 1;
-// //   });
-// //   rate=rate.slice(0,countries.length)
-// //   console.log(rate)
-// //
-// //   console.log(countries.length,rate.length)
-// //   for (let x=0;x<countries.length;x++){
-// //     console.log("DATA",countries[x],rate[x])
-// //     let count=countries[x].replace(/'/g,' ')
-// //       if(rate[x]){
-// // let r=rate[x].replace(',','')
-// // r=parseFloat(r)
-// //     await db.query(
-// //        `UPDATE countries
-// //         SET malnourishment_percentage = ${r}
-// //         WHERE name = '${count.toLowerCase()}';`
-// //     )
-// //   }
-// // }
-// //
+// }
 //
-// await page.goto('https://data.worldbank.org/indicator/SM.POP.REFG?view=chart');
+
+await page.goto('https://data.worldbank.org/indicator/SM.POP.REFG?view=chart');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
+// console.log(countries)
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+      let r=rate[x].replace(',','')
+      r=parseFloat(r)
+  await db.query(
+     `UPDATE countries SET refugee_population = ${r} WHERE name ='${count.toLowerCase()}'`
+  )
+}
+}
+
+// await page.goto('https://data.worldbank.org/indicator/SH.STA.TRAF.P5?view=chart');
 // await page.waitForTimeout(10000)
 //
 // countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
@@ -390,570 +418,542 @@ if (process.env.CLEARDB_DATABASE_URL) {
 // rate.shift();
 // // console.log(countries)
 // console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
+// rate=rate.filter(function(el, index) {
+//   return index % 2 === 1;
+// });
 // rate=rate.slice(0,countries.length)
-// console.log(countries.length,rate.length)
-// for (let x=0;x<countries.length;x++){
-//   console.log("DATA",countries[x],rate[x])
-//   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
-//       let r=rate[x].replace(',','')
-//       r=parseFloat(r)
-//   await db.query(
-//      `UPDATE countries SET refugee_population = ${r} WHERE name ='${count.toLowerCase()}'`
-//   )
-// }
-// }
-//
-// // await page.goto('https://data.worldbank.org/indicator/SH.STA.TRAF.P5?view=chart');
-// // await page.waitForTimeout(10000)
-// //
-// // countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
-// // console.log(countries)
-// // rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// // rate.shift();
-// // // console.log(countries)
-// // console.log(rate)
-// // rate=rate.filter(function(el, index) {
-// //   return index % 2 === 1;
-// // });
-// // rate=rate.slice(0,countries.length)
-// // console.log(rate)
-// // rate=rate.slice(0,countries.length)
-// // console.log(countries.length,rate.length)
-// // for (let x=0;x<countries.length;x++){
-// //   console.log("DATA",countries[x],rate[x])
-// //   let count=countries[x].replace(/'/g,' ')
-// //   if(rate[x]){
-// //             let r=rate[x].replace(',','')
-// //             r=parseFloat(r)
-// //   await db.query(
-// //      `UPDATE countries
-// //       SET road_traffic_deaths = ${r}
-// //       WHERE name = '${count}';`
-// //   )
-// // }
-// // }
-//
-// await page.goto('https://data.worldbank.org/indicator/SH.TBS.INCD?view=chart');
-// await page.waitForTimeout(10000)
-//
-// countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
-// console.log(countries)
-// rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// rate.shift();
-// // console.log(countries)
 // console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
 // rate=rate.slice(0,countries.length)
 // console.log(countries.length,rate.length)
 // for (let x=0;x<countries.length;x++){
 //   console.log("DATA",countries[x],rate[x])
 //   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
-//       let r=rate[x].replace(',','')
-//       r=parseFloat(r)
-//   await db.query(
-//      `UPDATE countries
-//       SET tuberculosis_per_hundred_thousand = ${r}
-//       WHERE name = '${count}';`
-//   )
-// }
-// }
-//
-// await page.goto('https://data.worldbank.org/indicator/SH.DTH.INJR.ZS?view=chart');
-// await page.waitForTimeout(10000)
-//
-// countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
-// console.log(countries)
-// rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// rate.shift();
-// // console.log(countries)
-// console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
-// rate=rate.slice(0,countries.length)
-// console.log(countries.length,rate.length)
-// for (let x=0;x<countries.length;x++){
-//   console.log("DATA",countries[x],rate[x])
-//   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
+//   if(rate[x]){
 //             let r=rate[x].replace(',','')
 //             r=parseFloat(r)
 //   await db.query(
 //      `UPDATE countries
-//       SET death_by_injury = ${r}
+//       SET road_traffic_deaths = ${r}
 //       WHERE name = '${count}';`
 //   )
 // }
 // }
-//
-// await page.goto('https://data.worldbank.org/indicator/SL.EMP.VULN.FE.ZS?view=chart');
-// await page.waitForTimeout(10000)
-//
-// countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+
+await page.goto('https://data.worldbank.org/indicator/SH.TBS.INCD?view=chart');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
 // console.log(countries)
-// rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// rate.shift();
-// // console.log(countries)
-// console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
-// rate=rate.slice(0,countries.length)
-// console.log(countries.length,rate.length)
-// for (let x=0;x<countries.length;x++){
-//   console.log("DATA",countries[x],rate[x])
-//   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
-// let r=rate[x].replace(',','')
-// r=parseFloat(r)
-//   await db.query(
-//      `UPDATE countries
-//       SET vulnerable_employment_women = ${r}
-//       WHERE name = '${count}';`
-//   )
-// }
-// }
-//
-//
-// await page.goto('https://data.worldbank.org/indicator/SL.EMP.VULN.MA.ZS?view=chart');
-// await page.waitForTimeout(10000)
-//
-// countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+      let r=rate[x].replace(',','')
+      r=parseFloat(r)
+  await db.query(
+     `UPDATE countries
+      SET tuberculosis_per_hundred_thousand = ${r}
+      WHERE name = '${count}';`
+  )
+}
+}
+
+await page.goto('https://data.worldbank.org/indicator/SH.DTH.INJR.ZS?view=chart');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
 // console.log(countries)
-// rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// rate.shift();
-// // console.log(countries)
-// console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
-// rate=rate.slice(0,countries.length)
-// console.log(countries.length,rate.length)
-// for (let x=0;x<countries.length;x++){
-//   console.log("DATA",countries[x],rate[x])
-//   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
-// let r=rate[x].replace(',','')
-// r=parseFloat(r)
-//   await db.query(
-//      `UPDATE countries
-//       SET vulnerable_employment_men = ${r}
-//       WHERE name = '${count}';`
-//   )
-// }
-// }
-//
-//
-// await page.goto('https://data.worldbank.org/indicator/SL.TLF.TOTL.FE.ZS');
-// await page.waitForTimeout(10000)
-//
-// countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+            let r=rate[x].replace(',','')
+            r=parseFloat(r)
+  await db.query(
+     `UPDATE countries
+      SET death_by_injury = ${r}
+      WHERE name = '${count}';`
+  )
+}
+}
+
+await page.goto('https://data.worldbank.org/indicator/SL.EMP.VULN.FE.ZS?view=chart');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
 // console.log(countries)
-// rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// rate.shift();
-// // console.log(countries)
-// console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
-// rate=rate.slice(0,countries.length)
-// console.log(countries.length,rate.length)
-// for (let x=0;x<countries.length;x++){
-//   console.log("DATA",countries[x],rate[x])
-//   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
-// let r=rate[x].replace(',','')
-// r=parseFloat(r)
-//   await db.query(
-//      `UPDATE countries
-//       SET labour_force_women_percentage = ${r}
-//       WHERE name = '${count}';`
-//   )
-// }
-// }
-//
-// await page.goto('https://data.worldbank.org/indicator/IC.FRM.FEMO.ZS?view=chart');
-// await page.waitForTimeout(10000)
-//
-// countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+let r=rate[x].replace(',','')
+r=parseFloat(r)
+  await db.query(
+     `UPDATE countries
+      SET vulnerable_employment_women = ${r}
+      WHERE name = '${count}';`
+  )
+}
+}
+
+
+await page.goto('https://data.worldbank.org/indicator/SL.EMP.VULN.MA.ZS?view=chart');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
 // console.log(countries)
-// rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// rate.shift();
-// // console.log(countries)
-// console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
-// rate=rate.slice(0,countries.length)
-// console.log(countries.length,rate.length)
-// for (let x=0;x<countries.length;x++){
-//   console.log("DATA",countries[x],rate[x])
-//   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
-// let r=rate[x].replace(',','')
-// r=parseFloat(r)
-//   await db.query(
-//      `UPDATE countries
-//       SET firms_with_some_female_ownership = ${r}
-//       WHERE name = '${count}';`
-//   )
-// }
-// }
-//
-// await page.goto('https://data.worldbank.org/indicator/EN.BIR.THRD.NO?view=chart');
-// await page.waitForTimeout(10000)
-//
-// countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+let r=rate[x].replace(',','')
+r=parseFloat(r)
+  await db.query(
+     `UPDATE countries
+      SET vulnerable_employment_men = ${r}
+      WHERE name = '${count}';`
+  )
+}
+}
+
+
+await page.goto('https://data.worldbank.org/indicator/SL.TLF.TOTL.FE.ZS');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
 // console.log(countries)
-// rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// rate.shift();
-// // console.log(countries)
-// console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
-// rate=rate.slice(0,countries.length)
-// console.log(countries.length,rate.length)
-// for (let x=0;x<countries.length;x++){
-//   console.log("DATA",countries[x],rate[x])
-//   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
-// let r=rate[x].replace(',','')
-// r=parseFloat(r)
-//   await db.query(
-//      `UPDATE countries
-//       SET threatened_bird_species = ${r}
-//       WHERE name = '${count}';`
-//   )
-// }
-// }
-//
-// await page.goto('https://data.worldbank.org/indicator/EN.FSH.THRD.NO?view=chart');
-// await page.waitForTimeout(10000)
-//
-// countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+let r=rate[x].replace(',','')
+r=parseFloat(r)
+  await db.query(
+     `UPDATE countries
+      SET labour_force_women_percentage = ${r}
+      WHERE name = '${count}';`
+  )
+}
+}
+
+await page.goto('https://data.worldbank.org/indicator/IC.FRM.FEMO.ZS?view=chart');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
 // console.log(countries)
-// rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// rate.shift();
-// // console.log(countries)
-// console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
-// rate=rate.slice(0,countries.length)
-// console.log(countries.length,rate.length)
-// for (let x=0;x<countries.length;x++){
-//   console.log("DATA",countries[x],rate[x])
-//   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
-// let r=rate[x].replace(',','')
-// r=parseFloat(r)
-//   await db.query(
-//      `UPDATE countries
-//       SET threatened_fish_species = ${r}
-//       WHERE name = '${count}';`
-//   )
-// }
-// }
-//
-// await page.goto('https://data.worldbank.org/indicator/EN.MAM.THRD.NO?view=chart');
-// await page.waitForTimeout(10000)
-//
-// countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+let r=rate[x].replace(',','')
+r=parseFloat(r)
+  await db.query(
+     `UPDATE countries
+      SET firms_with_some_female_ownership = ${r}
+      WHERE name = '${count}';`
+  )
+}
+}
+
+await page.goto('https://data.worldbank.org/indicator/EN.BIR.THRD.NO?view=chart');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
 // console.log(countries)
-// rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// rate.shift();
-// // console.log(countries)
-// console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
-// rate=rate.slice(0,countries.length)
-// console.log(countries.length,rate.length)
-// for (let x=0;x<countries.length;x++){
-//   console.log("DATA",countries[x],rate[x])
-//   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
-// let r=rate[x].replace(',','')
-// r=parseFloat(r)
-//   await db.query(
-//      `UPDATE countries
-//       SET threatened_mammal_species = ${r}
-//       WHERE name = '${count}';`
-//   )
-// }
-// }
-//
-//
-// await page.goto('https://data.worldbank.org/indicator/EN.HPT.THRD.NO?view=chart');
-// await page.waitForTimeout(10000)
-//
-// countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+let r=rate[x].replace(',','')
+r=parseFloat(r)
+  await db.query(
+     `UPDATE countries
+      SET threatened_bird_species = ${r}
+      WHERE name = '${count}';`
+  )
+}
+}
+
+await page.goto('https://data.worldbank.org/indicator/EN.FSH.THRD.NO?view=chart');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
 // console.log(countries)
-// rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// rate.shift();
-// // console.log(countries)
-// console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
-// rate=rate.slice(0,countries.length)
-// console.log(countries.length,rate.length)
-// for (let x=0;x<countries.length;x++){
-//   console.log("DATA",countries[x],rate[x])
-//   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
-// let r=rate[x].replace(',','')
-// r=parseFloat(r)
-//   await db.query(
-//      `UPDATE countries
-//       SET threatened_plant_species = ${r}
-//       WHERE name = '${count}';`
-//   )
-// }
-// }
-//
-// await page.goto('https://data.worldbank.org/indicator/NV.MNF.TECH.ZS.UN?view=chart');
-// await page.waitForTimeout(10000)
-//
-// countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+let r=rate[x].replace(',','')
+r=parseFloat(r)
+  await db.query(
+     `UPDATE countries
+      SET threatened_fish_species = ${r}
+      WHERE name = '${count}';`
+  )
+}
+}
+
+await page.goto('https://data.worldbank.org/indicator/EN.MAM.THRD.NO?view=chart');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
 // console.log(countries)
-// rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// rate.shift();
-// // console.log(countries)
-// console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
-// rate=rate.slice(0,countries.length)
-// console.log(countries.length,rate.length)
-// for (let x=0;x<countries.length;x++){
-//   console.log("DATA",countries[x],rate[x])
-//   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
-// let r=rate[x].replace(',','')
-// r=parseFloat(r)
-//   await db.query(
-//      `UPDATE countries
-//       SET medium_and_high_tech_manufacturing_value_added_percentage = ${r}
-//       WHERE name = '${count}';`
-//   )
-// }
-// }
-//
-// await page.goto('https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?view=chart');
-// await page.waitForTimeout(10000)
-//
-// countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+let r=rate[x].replace(',','')
+r=parseFloat(r)
+  await db.query(
+     `UPDATE countries
+      SET threatened_mammal_species = ${r}
+      WHERE name = '${count}';`
+  )
+}
+}
+
+
+await page.goto('https://data.worldbank.org/indicator/EN.HPT.THRD.NO?view=chart');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
 // console.log(countries)
-// rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// rate.shift();
-// // console.log(countries)
-// console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
-// rate=rate.slice(0,countries.length)
-// console.log(countries.length,rate.length)
-// for (let x=0;x<countries.length;x++){
-//   console.log("DATA",countries[x],rate[x])
-//   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
-// let r=rate[x].replace(',','')
-// r=parseFloat(r)
-//   await db.query(
-//      `UPDATE countries
-//       SET gdp_per_capita = ${r}
-//       WHERE name = '${count}';`
-//   )
-// }
-// }
-//
-//
-// await page.goto('https://data.worldbank.org/indicator/SH.DYN.AIDS.ZS?view=chart');
-// await page.waitForTimeout(10000)
-//
-// countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+let r=rate[x].replace(',','')
+r=parseFloat(r)
+  await db.query(
+     `UPDATE countries
+      SET threatened_plant_species = ${r}
+      WHERE name = '${count}';`
+  )
+}
+}
+
+await page.goto('https://data.worldbank.org/indicator/NV.MNF.TECH.ZS.UN?view=chart');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
 // console.log(countries)
-// rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// rate.shift();
-// // console.log(countries)
-// console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
-// rate=rate.slice(0,countries.length)
-// console.log(countries.length,rate.length)
-// for (let x=0;x<countries.length;x++){
-//   console.log("DATA",countries[x],rate[x])
-//   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
-// let r=rate[x].replace(',','')
-// r=parseFloat(r)
-//   await db.query(
-//      `UPDATE countries
-//       SET hiv_prevalence = ${r}
-//       WHERE name = '${count}';`
-//   )
-// }
-// }
-//
-// await page.goto('https://data.worldbank.org/indicator/SI.DST.FRST.20?view=chart');
-// await page.waitForTimeout(10000)
-//
-// countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+let r=rate[x].replace(',','')
+r=parseFloat(r)
+  await db.query(
+     `UPDATE countries
+      SET medium_and_high_tech_manufacturing_value_added_percentage = ${r}
+      WHERE name = '${count}';`
+  )
+}
+}
+
+await page.goto('https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?view=chart');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
 // console.log(countries)
-// rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// rate.shift();
-// // console.log(countries)
-// console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
-// rate=rate.slice(0,countries.length)
-// console.log(countries.length,rate.length)
-// for (let x=0;x<countries.length;x++){
-//   console.log("DATA",countries[x],rate[x])
-//   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
-// let r=rate[x].replace(',','')
-// r=parseFloat(r)
-//   await db.query(
-//      `UPDATE countries
-//       SET income_share_lowest_twenty_percent = ${r}
-//       WHERE name = '${count}';`
-//   )
-// }
-// }
-//
-//
-// await page.goto('https://data.worldbank.org/indicator/TX.VAL.TECH.CD?view=chart');
-// await page.waitForTimeout(10000)
-//
-// countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+let r=rate[x].replace(',','')
+r=parseFloat(r)
+  await db.query(
+     `UPDATE countries
+      SET gdp_per_capita = ${r}
+      WHERE name = '${count}';`
+  )
+}
+}
+
+
+await page.goto('https://data.worldbank.org/indicator/SH.DYN.AIDS.ZS?view=chart');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
 // console.log(countries)
-// rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// rate.shift();
-// // console.log(countries)
-// console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
-// rate=rate.slice(0,countries.length)
-// console.log(countries.length,rate.length)
-// for (let x=0;x<countries.length;x++){
-//   console.log("DATA",countries[x],rate[x])
-//   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
-// let r=rate[x].replace(',','')
-// r=parseFloat(r)
-//   await db.query(
-//      `UPDATE countries
-//       SET high_technology_exports = ${r}
-//       WHERE name = '${count}';`
-//   )
-// }
-// }
-//
-// await page.goto('https://data.worldbank.org/indicator/IQ.CPA.SOCI.XQ?view=chart');
-// await page.waitForTimeout(10000)
-//
-// countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+let r=rate[x].replace(',','')
+r=parseFloat(r)
+  await db.query(
+     `UPDATE countries
+      SET hiv_prevalence = ${r}
+      WHERE name = '${count}';`
+  )
+}
+}
+
+await page.goto('https://data.worldbank.org/indicator/SI.DST.FRST.20?view=chart');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
 // console.log(countries)
-// rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// rate.shift();
-// // console.log(countries)
-// console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
-// rate=rate.slice(0,countries.length)
-// console.log(countries.length,rate.length)
-// for (let x=0;x<countries.length;x++){
-//   console.log("DATA",countries[x],rate[x])
-//   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
-// let r=rate[x].replace(',','')
-// r=parseFloat(r)
-//   await db.query(
-//      `UPDATE countries
-//       SET cpia_social_equity_policies_average = ${r}
-//       WHERE name = '${count}';`
-//   )
-// }
-// }
-//
-//
-// await page.goto('https://data.worldbank.org/indicator/IC.REG.DURS?view=chart');
-// await page.waitForTimeout(10000)
-//
-// countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+let r=rate[x].replace(',','')
+r=parseFloat(r)
+  await db.query(
+     `UPDATE countries
+      SET income_share_lowest_twenty_percent = ${r}
+      WHERE name = '${count}';`
+  )
+}
+}
+
+
+await page.goto('https://data.worldbank.org/indicator/TX.VAL.TECH.CD?view=chart');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
 // console.log(countries)
-// rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
-// rate.shift();
-// // console.log(countries)
-// console.log(rate)
-//  rate=rate.filter(function(el, index) {
-//     return index % 2 === 1;
-//   });
-//   rate=rate.slice(0,countries.length)
-//   console.log(rate)
-// rate=rate.slice(0,countries.length)
-// console.log(countries.length,rate.length)
-// for (let x=0;x<countries.length;x++){
-//   console.log("DATA",countries[x],rate[x])
-//   let count=countries[x].replace(/'/g,' ')
-//     if(rate[x]){
-// let r=rate[x].replace(',','')
-// r=parseFloat(r)
-//   await db.query(
-//      `UPDATE countries
-//       SET time_required_to_start_business = ${r}
-//       WHERE name = '${count}';`
-//   )
-// }
-// }
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+let r=rate[x].replace(',','')
+r=parseFloat(r)
+  await db.query(
+     `UPDATE countries
+      SET high_technology_exports = ${r}
+      WHERE name = '${count}';`
+  )
+}
+}
+
+await page.goto('https://data.worldbank.org/indicator/IQ.CPA.SOCI.XQ?view=chart');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
+// console.log(countries)
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+let r=rate[x].replace(',','')
+r=parseFloat(r)
+  await db.query(
+     `UPDATE countries
+      SET cpia_social_equity_policies_average = ${r}
+      WHERE name = '${count}';`
+  )
+}
+}
+
+
+await page.goto('https://data.worldbank.org/indicator/IC.REG.DURS?view=chart');
+await page.waitForTimeout(10000)
+
+countries = await page.$$eval('a.country-name', links => { return links.map(link => link.textContent)})
+console.log(countries)
+rate = await page.$$eval('section.body div.infinite div.item div+div+div', links => { return links.map(link => link.textContent)})
+rate.shift();
+// console.log(countries)
+console.log(rate)
+ rate=rate.filter(function(el, index) {
+    return index % 2 === 1;
+  });
+  rate=rate.slice(0,countries.length)
+  console.log(rate)
+rate=rate.slice(0,countries.length)
+console.log(countries.length,rate.length)
+for (let x=0;x<countries.length;x++){
+  console.log("DATA",countries[x],rate[x])
+  let count=countries[x].replace(/'/g,' ')
+    if(rate[x]){
+let r=rate[x].replace(',','')
+r=parseFloat(r)
+  await db.query(
+     `UPDATE countries
+      SET time_required_to_start_business = ${r}
+      WHERE name = '${count}';`
+  )
+}
+}
 
 await page.goto('https://data.worldbank.org/indicator/SI.SPR.PCAP.ZG?view=chart');
 await page.waitForTimeout(10000)
