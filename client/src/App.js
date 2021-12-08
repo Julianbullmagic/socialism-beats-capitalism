@@ -5,6 +5,7 @@ import { Bar } from 'react-chartjs-2';
 import * as zoom from 'chartjs-plugin-zoom'
 import Hammer from "hammerjs";
 let baseurl='http://localhost:5000/'
+console.log("process.env.NODE_ENV",process.env.NODE_ENV)
 if(process.env.NODE_ENV=="production"){
   baseurl="/"
 }
