@@ -45,7 +45,7 @@ const { height, width } = useWindowDimensions()
 
 
 useEffect(()=>{
-  fetch(baseurl+'getalldata')
+  fetch('/getalldata')
   .then(result=>result.json())
   .then(data=>{
     var datacopy=JSON.parse(JSON.stringify(data))
@@ -62,7 +62,7 @@ console.log("statLabels",filtereddatacopy)
    setStatLabels(filtereddatacopythree)
  }).catch(err=>console.log(err))
 
-  fetch(baseurl+'getallcountries')
+  fetch('/getallcountries')
   .then(result=>result.json())
   .then(data=>{
 console.log(data)
@@ -125,7 +125,7 @@ async function handleSubmitCountry(e) {
 
     console.log(secondCountrySearchTerm.current.value)
 
-    var datacopy=await fetch(baseurl+"searchcountries/"+secondCountrySearchTerm.current.value)
+    var datacopy=await fetch("/searchcountries/"+secondCountrySearchTerm.current.value)
     .then(result=>result.json())
     .then(data=>{
       console.log(data[0])
@@ -141,7 +141,7 @@ return datacopy
     }).catch((error) => {
   console.error('Error:', error);
 });
-        await fetch(baseurl+"searchcountries/"+searchValue.current.value)
+        await fetch("/searchcountries/"+searchValue.current.value)
         .then(result=>result.json())
         .then(data=>{
           console.log(data[0])
@@ -252,7 +252,7 @@ async function handleStatisticChange(event) {
   setOtherStats({})
     event.preventDefault()
     console.log("event.target",event.target.value)
-        await fetch("http://localhost:5000/searchstats/"+event.target.value)
+        await fetch("/searchstats/"+event.target.value)
         .then(result=>result.json())
         .then(data=>{
           console.log(data)
