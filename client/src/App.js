@@ -43,7 +43,7 @@ const { height, width } = useWindowDimensions()
 useEffect(()=>{
 
 
-  fetch('http://localhost:5000/getalldata')
+  fetch('/getalldata')
   .then(result=>result.json())
   .then(data=>{
     var datacopy=JSON.parse(JSON.stringify(data))
@@ -139,7 +139,7 @@ return datacopy
     }).catch((error) => {
   console.error('Error:', error);
 });
-        await fetch("http://localhost:5000/searchcountries/"+searchValue.current.value)
+        await fetch("/searchcountries/"+searchValue.current.value)
         .then(result=>result.json())
         .then(data=>{
           console.log(data[0])
