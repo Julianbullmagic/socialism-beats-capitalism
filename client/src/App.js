@@ -757,7 +757,6 @@ var otherstatistics=[
   'death_by_injury',
   'threatened_plant_species',
   'CO2_emissions_metric_tons_per_capita',
-  'refugee_population',
   'drug_related_deaths_per_hundred_thousand',
   "homelessness_rate",
   `CO2_emissions_metric_tons_per_capita`,
