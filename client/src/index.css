@@ -31,6 +31,9 @@ height:10vh;
 position:fixed;
 border-radius:10px;
 background-color:white;
+display:flex;
+justify-content:space-around;
+align-items:center;
 }
 
 
@@ -168,14 +171,13 @@ height:44vh;
   .container{
   top:2vh;
   left:2vw;
-  width:96vw;
+  width:90vw;
   height:20vh;
   position:fixed;
   border-radius:10px;
   background-color:white;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction:column;
   }
 
   input {

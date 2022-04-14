@@ -463,7 +463,8 @@ if (process.env.CLEARDB_DATABASE_URL) {
 
 
 
-    await page.goto('https://en.wikipedia.org/wiki/List_of_countries_by_incarceration_rate');
+    await page.goto('https://en.wikipedia.org/wiki/List_of_countries_by_incarceration_rate', {waitUntil: 'load', timeout: 0});
+    await page.waitForSelector('table.wikitable tbody tr td:first-of-type a[title]')
     countries = await page.$$eval('table.wikitable tbody tr td:first-of-type a[title]', links => { return links.map(link => link.textContent)})
     countries=countries.map(item=>{return item.replace("*",'').trim()})
     console.log(countries)

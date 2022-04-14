@@ -487,7 +487,7 @@ console.log("displayastatallcountries",displayastatallcountries)
 
     <div className='container form'>
         <label htmlFor='name'>Search for a particular stat</label>
-        <select name="room" id="room" style={{height:"9vh",width:""}} onChange={(e) => handleStatisticChange(e)}>
+        <select name="room" id="room" onChange={(e) => handleStatisticChange(e)}>
         <option value={null}></option>
           <option style={{color: "red",fontWeight:"strong"}} value={null}>Health</option>
           <option value={'heart_disease_deaths_per_hundred_thousand'}>
