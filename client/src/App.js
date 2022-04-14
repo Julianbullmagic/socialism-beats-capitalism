@@ -645,7 +645,6 @@ console.log("displayastatallcountries",displayastatallcountries)
           refugee_population</option>
               <option value={null}></option>
         </select>
-    </section>
     </div>
     <p className="explanation">Data from the World Bank, World Health Organization and United Nations Developement Programme
     shows that in general, socialist countries are much more humanistic than capitalist countries in almost every way. Their
