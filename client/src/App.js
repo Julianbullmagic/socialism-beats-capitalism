@@ -661,7 +661,9 @@ console.log("displayastatallcountries",displayastatallcountries)
      In the last century, Socialist states have risen from being very poor oppressed colonized countries, to becoming very prosperous.
      Socialist countries have achieved this common wealth by much more humane and ethical means than the empires of Europe. They do
      not invade poorer or weaker countries in order to steal resources or crush working class revolutions. Instead they give assistance
-     to try to form mutually beneficial relationships.</p>
+     to try to form mutually beneficial relationships.
+     Even when we compare socialist countries with first world capitalist countries, in many ways socialism is doing better,
+     or they have been catching up incredibly quickly.</p>
     </>
   )}
 
