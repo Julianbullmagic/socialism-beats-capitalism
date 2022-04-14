@@ -429,7 +429,7 @@ console.log("displayastatallcountries",displayastatallcountries)
     <div className='screenbig'>
     {data&&<div className='graph graphone'  ref={messagesEndRef} style={{overflowY:"scroll",overflowX:"scroll",display:displayastatallcountries}} options={{ maintainAspectRatio: false }}>
     <div className='innergraphone' style={{display:displayastatallcountries, height:zoom}} options={{ maintainAspectRatio: false }}>
-    <a href={{reference}} style={{overflowX:"hidden"}}>{reference}</a>
+    <a href={{reference}} style={{overflowX:"hidden",marginLeft:"1vw"}}>Reference: {reference}</a>
     <Bar  options={{ maintainAspectRatio: false,responsive:true, zoom: {enabled: true,mode: 'x',},pan: {enabled: true,mode: 'x',} }} data={data}/>
     </div>
     </div>}
@@ -492,8 +492,6 @@ console.log("displayastatallcountries",displayastatallcountries)
     <div className='container form'>
       <section>
         <label htmlFor='name'>Search for a particular stat for all countries</label>
-        <button style={{margin:'5px'}} onClick={(e) => zoomIn(e)}>Zoom +</button>
-        <button style={{margin:'5px'}} onClick={(e) => zoomOut(e)}>Zoom -</button>
         <select name="room" id="room" onChange={(e) => handleStatisticChange(e)}>
         <option value={null}></option>
           <option style={{color: "red",fontWeight:"strong"}} value={null}>Health</option>
@@ -646,6 +644,8 @@ console.log("displayastatallcountries",displayastatallcountries)
           refugee_population</option>
               <option value={null}></option>
         </select>
+        <button style={{margin:'5px'}} onClick={(e) => zoomIn(e)}>Zoom +</button>
+        <button style={{margin:'5px'}} onClick={(e) => zoomOut(e)}>Zoom -</button>
     </section>
     </div>
     <p className="explanation">Data from the World Bank, World Health Organization and United Nations Developement Programme

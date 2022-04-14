@@ -24,6 +24,7 @@ background-size: cover;
 
 .container{
 top:5vh;
+margin:2vw;
 left:38vw;
 width:57vw;
 height:20vh;
@@ -160,7 +161,7 @@ height:44vh;
 
 
 
-@media only screen and (max-width: 361px) {
+@media only screen and (max-width: 413px) {
 
   hr{
     width:96vw;
@@ -170,7 +171,7 @@ height:44vh;
   top:2vh;
   left:2vw;
   width:96vw;
-  height:49vh;
+  height:20vh;
   position:fixed;
   border-radius:10px;
   background-color:white;
