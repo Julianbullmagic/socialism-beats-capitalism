@@ -21,9 +21,9 @@ app.use(function(req,res,next){
 if (process.env.CLEARDB_DATABASE_URL) {
   // console.log('yes using CLEARDB_DATABASE_URL')
   // console.log(process.env.CLEARDB_DATABASE_URL)
-  var db = mysql.createConnection(process.env.CLEARDB_DATABASE_URL)
+  var db = mysql.createPool(process.env.CLEARDB_DATABASE_URL)
 } else {
-   var db = mysql.createConnection('mysql://b6f6f5c1639476:9e638cc8@us-cdbr-east-04.cleardb.com/heroku_34c644139b40fcc?reconnect=true');
+   var db = mysql.createPool('mysql://b6f6f5c1639476:9e638cc8@us-cdbr-east-04.cleardb.com/heroku_34c644139b40fcc?reconnect=true');
 };
 
 

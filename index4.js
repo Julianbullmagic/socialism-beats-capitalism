@@ -427,7 +427,7 @@ for (var country in countriesObject){
   let infant=countriesObject[`${count}`][`infantmortalityperthousand`]
   let unemployment=countriesObject[`${count}`][`totalunemploymentrate`]
   let co2=countriesObject[`${count}`][`co2emissions`]
-  console.log(countriesObject[`${count}`])
+  console.log("prison",prison)
 
 db.query(
    `UPDATE countries

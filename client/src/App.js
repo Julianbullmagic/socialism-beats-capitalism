@@ -397,7 +397,7 @@ if(capitalistvaluestimespopulation.length>0){
          setGraphSize(dat.length*20)
           setData(dataobject)
         }).catch((error) => {
-    console.error('Error:', error);
+    console.log('Error:', error);
   });
   }
 }
