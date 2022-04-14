@@ -490,38 +490,9 @@ console.log("displayastatallcountries",displayastatallcountries)
 
 
 
-    <div className='container form'>
-    <section className='main'>
-        <label htmlFor='name'>Search for statistics on a particular country</label>
-        <input
-          type='text'
-          name='searchValue'
-          id='searchValue'
-          defaultValue='China'
-          ref={searchValue}
-        />
-        <label htmlFor='name'>Search for stats on a second country to compare</label>
-        <input
-          type='text'
-          name='secondCountrySearchTerm'
-          id='secondCountrySearchTerm'
-          defaultValue='Australia'
-          ref={secondCountrySearchTerm}
-        />
-        <div id="buttondiv">
-        <button style={{margin:'5px'}} onClick={(e) => handleSubmitCountry(e)}>Search</button>
-        <button className="togglebutton" style={{margin:'5px'}} onClick={() => setToggle(!toggle)}>See More Stats</button>
+        <label htmlFor='name'>Search for a particular stat for all countries</label>
         <button style={{margin:'5px'}} onClick={(e) => zoomIn(e)}>Zoom +</button>
         <button style={{margin:'5px'}} onClick={(e) => zoomOut(e)}>Zoom -</button>
-        </div>
-        <hr style={{
-
-        color: '#000000',
-        backgroundColor: '#000000',
-        height: .5,
-        borderColor : '#000000'
-        }}/>
-        <label htmlFor='name'>Search for a particular stat for all countries</label>
         <select name="room" id="room" onChange={(e) => handleStatisticChange(e)}>
         <option value={null}></option>
           <option style={{color: "red",fontWeight:"strong"}} value={null}>Health</option>
@@ -785,3 +756,35 @@ var otherstatistics=[
   "suicide_rate_male",
   `hospital_beds_per_thousand`,
   "suicide_rate_female"]
+
+
+  // <div className='container form'>
+  // <section className='main'>
+  //     <label htmlFor='name'>Search for statistics on a particular country</label>
+  //     <input
+  //       type='text'
+  //       name='searchValue'
+  //       id='searchValue'
+  //       defaultValue='China'
+  //       ref={searchValue}
+  //     />
+  //     <label htmlFor='name'>Search for stats on a second country to compare</label>
+  //     <input
+  //       type='text'
+  //       name='secondCountrySearchTerm'
+  //       id='secondCountrySearchTerm'
+  //       defaultValue='Australia'
+  //       ref={secondCountrySearchTerm}
+  //     />
+  //     <div id="buttondiv">
+  //     <button style={{margin:'5px'}} onClick={(e) => handleSubmitCountry(e)}>Search</button>
+  //     <button className="togglebutton" style={{margin:'5px'}} onClick={() => setToggle(!toggle)}>See More Stats</button>
+
+          // </div>
+          // <hr style={{
+          //
+          // color: '#000000',
+          // backgroundColor: '#000000',
+          // height: .5,
+          // borderColor : '#000000'
+          // }}/>
