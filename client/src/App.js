@@ -482,7 +482,6 @@ console.log("displayastatallcountries",displayastatallcountries)
     <div className='innergraphone' style={{width:"90vw", height:zoom}} options={{ maintainAspectRatio: false }}>
     <Bar options={{ maintainAspectRatio: false, responsive:true,zoom: {enabled: true,mode: 'x',},pan: {enabled: true,mode: 'x',} }} data={percentageStats} /></div></div>}
     </div>
-
     </div>
 
 
@@ -490,6 +489,8 @@ console.log("displayastatallcountries",displayastatallcountries)
 
 
 
+    <div className='container form'>
+      <section>
         <label htmlFor='name'>Search for a particular stat for all countries</label>
         <button style={{margin:'5px'}} onClick={(e) => zoomIn(e)}>Zoom +</button>
         <button style={{margin:'5px'}} onClick={(e) => zoomOut(e)}>Zoom -</button>
@@ -645,7 +646,8 @@ console.log("displayastatallcountries",displayastatallcountries)
           refugee_population</option>
               <option value={null}></option>
         </select>
-
+    </section>
+    </div>
     <p className="explanation">Data from the World Bank, World Health Organization and United Nations Developement Programme
     shows that in general, socialist countries are much more humanistic than capitalist countries in almost every way. Their
     standards of mental and physical health are better, the cost of living is cheaper (particularly housing), wages rise much more rapidly,
@@ -757,7 +759,7 @@ var otherstatistics=[
   "suicide_rate_female"]
 
 
-  // <div className='container form'>
+
   // <section className='main'>
   //     <label htmlFor='name'>Search for statistics on a particular country</label>
   //     <input
@@ -778,44 +780,3 @@ var otherstatistics=[
   //     <div id="buttondiv">
   //     <button style={{margin:'5px'}} onClick={(e) => handleSubmitCountry(e)}>Search</button>
   //     <button className="togglebutton" style={{margin:'5px'}} onClick={() => setToggle(!toggle)}>See More Stats</button>
-
-          // </div>
-          // <hr style={{
-          //
-          // color: '#000000',
-          // backgroundColor: '#000000',
-          // height: .5,
-          // borderColor : '#000000'
-          // }}/>
-          // <div className='container form'>
-          // <section className='main'>
-          //     <label htmlFor='name'>Search for statistics on a particular country</label>
-          //     <input
-          //       type='text'
-          //       name='searchValue'
-          //       id='searchValue'
-          //       defaultValue='China'
-          //       ref={searchValue}
-          //     />
-          //     <label htmlFor='name'>Search for stats on a second country to compare</label>
-          //     <input
-          //       type='text'
-          //       name='secondCountrySearchTerm'
-          //       id='secondCountrySearchTerm'
-          //       defaultValue='Australia'
-          //       ref={secondCountrySearchTerm}
-          //     />
-          //     <div id="buttondiv">
-          //     <button style={{margin:'5px'}} onClick={(e) => handleSubmitCountry(e)}>Search</button>
-          //     <button className="togglebutton" style={{margin:'5px'}} onClick={() => setToggle(!toggle)}>See More Stats</button>
-
-                  // </div>
-                  // <hr style={{
-                  //
-                  // color: '#000000',
-                  // backgroundColor: '#000000',
-                  // height: .5,
-                  // borderColor : '#000000'
-                  // }}/>
-                  // </div>
-                  // </section>
