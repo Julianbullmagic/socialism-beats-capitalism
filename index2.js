@@ -451,6 +451,11 @@ for (var x in countriesObject){
 
   if (Object.keys(countriesObject[`${x}`]).length>0){
     console.log(x,countriesObject[`${x}`])
+    let suiciderate=null
+    if (countriesObject[`${x}`][`suicideratefemale`]&&countriesObject[`${x}`][`suicideratemale`]){
+      suiciderate=countriesObject[`${x}`][`suicideratemale`]+countriesObject[`${x}`][`suicideratefemale`]
+    }
+
     await db.query(
        `UPDATE countries
         SET population=${countriesObject[`${x}`][`population`]||null},
@@ -460,8 +465,7 @@ for (var x in countriesObject){
          natural_resource_depletion=${countriesObject[`${x}`][`naturalresourcedepletion`]||null},
          research_and_development_expenditure_percent_of_gpd=${countriesObject[`${x}`][`researchanddevelopmentexpenditurepercentofgpd`]||null},
          percentage_women_in_parliament=${countriesObject[`${x}`][`percentagewomeninparliament`]||null},
-         suicide_rate_male=${countriesObject[`${x}`][`suicideratemale`]||null},
-         suicide_rate_female=${countriesObject[`${x}`][`suicideratefemale`]||null}
+         suicide_rate_per_hundred_thousand=${suiciderate||null}
         WHERE name = '${x.toLowerCase()}';`
     )
     console.log(x,"inserted into database")

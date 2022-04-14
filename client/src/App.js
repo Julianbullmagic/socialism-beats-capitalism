@@ -10,6 +10,8 @@ if(process.env.NODE_ENV=="production"){
   baseurl="/"
 }
 
+console.log("baseurl",baseurl)
+
 var socialistcountriesmarxistleninist=["china","laos","north korea","cuba","viet nam","vietnam"]
 
 var socialdemocraticcountries=["norway","sweden","finland","denmark","portugal",
@@ -45,7 +47,7 @@ const { height, width } = useWindowDimensions()
 
 
 useEffect(()=>{
-  fetch('/getalldata')
+  fetch(baseurl+'getalldata')
   .then(result=>result.json())
   .then(data=>{
     var datacopy=JSON.parse(JSON.stringify(data))
@@ -62,7 +64,7 @@ console.log("statLabels",filtereddatacopy)
    setStatLabels(filtereddatacopythree)
  }).catch(err=>console.log(err))
 
-  fetch('/getallcountries')
+  fetch(baseurl+'getallcountries')
   .then(result=>result.json())
   .then(data=>{
 console.log(data)
@@ -124,8 +126,8 @@ async function handleSubmitCountry(e) {
 
 
     console.log(secondCountrySearchTerm.current.value)
-
-    var datacopy=await fetch("/searchcountries/"+secondCountrySearchTerm.current.value)
+console.log("searching",baseurl+"searchcountries/"+secondCountrySearchTerm.current.value)
+    var datacopy=await fetch(baseurl+"searchcountries/"+secondCountrySearchTerm.current.value)
     .then(result=>result.json())
     .then(data=>{
       console.log(data[0])
@@ -141,7 +143,7 @@ return datacopy
     }).catch((error) => {
   console.error('Error:', error);
 });
-        await fetch("/searchcountries/"+searchValue.current.value)
+        await fetch(baseurl+"searchcountries/"+searchValue.current.value)
         .then(result=>result.json())
         .then(data=>{
           console.log(data[0])
@@ -252,7 +254,7 @@ async function handleStatisticChange(event) {
   setOtherStats({})
     event.preventDefault()
     console.log("event.target",event.target.value)
-        await fetch("/searchstats/"+event.target.value)
+        await fetch(baseurl+"searchstats/"+event.target.value)
         .then(result=>result.json())
         .then(data=>{
           console.log(data)
@@ -421,7 +423,6 @@ if(Object.keys(data).length>1){
   }
 }
 console.log("percentage STATS",percentageStats)
-
 console.log("displayastatallcountries",displayastatallcountries)
   return (
     <>
@@ -484,21 +485,13 @@ console.log("displayastatallcountries",displayastatallcountries)
     </div>
     </div>
 
-
-
-
-
-
     <div className='container form'>
-      <section>
-        <label htmlFor='name'>Search for a particular stat for all countries</label>
-        <select name="room" id="room" onChange={(e) => handleStatisticChange(e)}>
+        <label htmlFor='name'>Search for a particular stat</label>
+        <select name="room" id="room" style={{height:"9vh",width:""}} onChange={(e) => handleStatisticChange(e)}>
         <option value={null}></option>
           <option style={{color: "red",fontWeight:"strong"}} value={null}>Health</option>
           <option value={'heart_disease_deaths_per_hundred_thousand'}>
           heart_disease_deaths_per_hundred_thousand</option>
-          <option value={'drug_related_deaths_per_hundred_thousand'}>
-          drug_related_deaths_per_hundred_thousand</option>
           <option value={'obesity_percentage'}>
           obesity_percentage</option>
           <option value={'life_expectancy'}>
@@ -507,10 +500,8 @@ console.log("displayastatallcountries",displayastatallcountries)
           infant_mortality</option>
           <option value={'adolescent_birth_rate_per_thousand'}>
           adolescent_birth_rate_per_thousand</option>
-          <option value={'suicide_rate_male'}>
-          suicide_rate_male</option>
-          <option value={'suicide_rate_female'}>
-          suicide_rate_female</option>
+          <option value={'suicide_rate_per_hundred_thousand'}>
+          suicide_rate_per_hundred_thousand</option>
           <option value={'cancer_deaths_per_hundred_thousand'}>
           cancer_deaths_per_hundred_thousand</option>
           <option value={'malnourishment_percentage'}>
@@ -525,8 +516,6 @@ console.log("displayastatallcountries",displayastatallcountries)
           tuberculosis_per_hundred_thousand</option>
           <option value={'death_by_injury'}>
           death_by_injury</option>
-          <option value={'hiv_prevalence'}>
-          hiv_prevalence</option>
           <option value={'hospital_beds_per_thousand'}>
           hospital_beds_per_thousand</option>
 
@@ -644,9 +633,7 @@ console.log("displayastatallcountries",displayastatallcountries)
           refugee_population</option>
               <option value={null}></option>
         </select>
-        <button style={{margin:'5px'}} onClick={(e) => zoomIn(e)}>Zoom +</button>
-        <button style={{margin:'5px'}} onClick={(e) => zoomOut(e)}>Zoom -</button>
-    </section>
+
     </div>
     <p className="explanation">Data from the World Bank, World Health Organization and United Nations Developement Programme
     shows that in general, socialist countries are much more humanistic than capitalist countries in almost every way. Their
@@ -759,9 +746,10 @@ var otherstatistics=[
   "suicide_rate_male",
   `hospital_beds_per_thousand`,
   "suicide_rate_female"]
-
-
-
+  //
+  // <button style={{margin:'5px'}} onClick={(e) => zoomIn(e)}>Zoom +</button>
+  // <button style={{margin:'5px'}} onClick={(e) => zoomOut(e)}>Zoom -</button>
+  //
   // <section className='main'>
   //     <label htmlFor='name'>Search for statistics on a particular country</label>
   //     <input

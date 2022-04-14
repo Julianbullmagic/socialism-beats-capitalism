@@ -24,17 +24,15 @@ background-size: cover;
 
 .container{
 top:5vh;
-margin:2vw;
+padding:2vw;
 left:38vw;
-width:57vw;
-height:20vh;
+width:53vw;
+height:10vh;
 position:fixed;
 border-radius:10px;
 background-color:white;
-display: flex;
-justify-content: center;
-align-items: center;
 }
+
 
 .explanation{
   z-index:-1;
@@ -75,7 +73,7 @@ input {
 select{
   margin:5px;
   height:6vh;
-  width:260px;
+  width:25vw;
   margin-bottom:10px;
   padding:10px;
   border:0;
