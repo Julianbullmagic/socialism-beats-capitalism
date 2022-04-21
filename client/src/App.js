@@ -442,7 +442,7 @@ console.log("displayastatallcountries",displayastatallcountries)
     </div>
 
     <div className='screensmall'>
-    {(toggle&&data)&&<div className='graph graphone' ref={messagesEndRef} style={{overflowY:"scroll",overflowX:"scroll",
+    {data&&<div className='graph graphone' ref={messagesEndRef} style={{overflowY:"scroll",overflowX:"scroll",
     display:displayastatallcountries}} options={{ maintainAspectRatio: false }}>
     <div className='innergraphone' style={{display:displayastatallcountries, height:zoom}} options={{ maintainAspectRatio: false }}>
     <a href={{reference}} style={{overflowX:"hidden"}}>{reference}</a>
@@ -450,7 +450,7 @@ console.log("displayastatallcountries",displayastatallcountries)
     </div>
     </div>}
 
-    {(!toggle&&averagesData)&&<div className='graph graphtwo' ref={messagesEndRef} style={{overflowY:"scroll",overflowX:"scroll",display:displayastatallcountries}}>
+    {averagesData&&<div className='graph graphtwo' ref={messagesEndRef} style={{overflowY:"scroll",overflowX:"scroll",display:displayastatallcountries}}>
     <div className='innergraphtwo' style={{display:displayastatallcountries, height:zoom}} options={{ maintainAspectRatio: false }}>
     <Bar options={{ maintainAspectRatio: false, responsive:true, zoom: {enabled: true,mode: 'x',},pan: {enabled: true,mode: 'x',} }} data={averagesData}/>
     </div>
