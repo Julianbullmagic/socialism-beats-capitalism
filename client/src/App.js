@@ -635,22 +635,6 @@ console.log("displayastatallcountries",displayastatallcountries)
         </select>
 
     </div>
-    <p className="explanation">Data from the World Bank, World Health Organization and United Nations Developement Programme
-    shows that in general, socialist countries are much more humanistic than capitalist countries in almost every way. Their
-    standards of mental and physical health are better, the cost of living is cheaper (particularly housing), wages rise much more rapidly,
-    the rates of unemployment are lower, university cheaper. It is much easier to find and change career, workers can be more brave
-    about standing up and criticising the leaders of the organizations they work with, because being fired is not such a tragedy.
-    Socialist countries have much fewer homeless people. Their criminal justice system is usually more humane and this results
-    in lower rates of violent crime and criminal re-ooffending.
-    Socialist countries are more feministic, they often have a higher proportion of women in parliament, higher female
-    enrolement in tertiary education, heavily subsidised childcare and women do less unpaid housework. There is better
-    access to contraception and fewer teenage pregnancies.
-     In the last century, Socialist states have risen from being very poor oppressed colonized countries, to becoming very prosperous.
-     Socialist countries have achieved this common wealth by much more humane and ethical means than the empires of Europe. They do
-     not invade poorer or weaker countries in order to steal resources or crush working class revolutions. Instead they give assistance
-     to try to form mutually beneficial relationships.
-     Even when we compare socialist countries with first world capitalist countries, in many ways socialism is doing better,
-     or they have been catching up incredibly quickly.</p>
     </>
   )}
 
@@ -746,6 +730,26 @@ var otherstatistics=[
   "suicide_rate_male",
   `hospital_beds_per_thousand`,
   "suicide_rate_female"]
+
+
+
+  // <p className="explanation">Data from the World Bank, World Health Organization and United Nations Developement Programme
+  // shows that in general, socialist countries are much more humanistic than capitalist countries in almost every way. Their
+  // standards of mental and physical health are better, the cost of living is cheaper (particularly housing), wages rise much more rapidly,
+  // the rates of unemployment are lower, university cheaper. It is much easier to find and change career, workers can be more brave
+  // about standing up and criticising the leaders of the organizations they work with, because being fired is not such a tragedy.
+  // Socialist countries have much fewer homeless people. Their criminal justice system is usually more humane and this results
+  // in lower rates of violent crime and criminal re-ooffending.
+  // Socialist countries are more feministic, they often have a higher proportion of women in parliament, higher female
+  // enrolement in tertiary education, heavily subsidised childcare and women do less unpaid housework. There is better
+  // access to contraception and fewer teenage pregnancies.
+  //  In the last century, Socialist states have risen from being very poor oppressed colonized countries, to becoming very prosperous.
+  //  Socialist countries have achieved this common wealth by much more humane and ethical means than the empires of Europe. They do
+  //  not invade poorer or weaker countries in order to steal resources or crush working class revolutions. Instead they give assistance
+  //  to try to form mutually beneficial relationships.
+  //  Even when we compare socialist countries with first world capitalist countries, in many ways socialism is doing better,
+  //  or they have been catching up incredibly quickly.</p>
+
   //
   // <button style={{margin:'5px'}} onClick={(e) => zoomIn(e)}>Zoom +</button>
   // <button style={{margin:'5px'}} onClick={(e) => zoomOut(e)}>Zoom -</button>
